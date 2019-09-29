@@ -13,3 +13,18 @@ app.use(express.static('public'));
 
 // Socket setup
 const io = socket(server); // Waiting for client. Listen out for when the connection is made..
+
+let clients = [];
+
+setInterval(() => {
+	
+}, 33);
+
+io.on('connection', (socket) => {
+	clients.push(socket.id);
+	console.log(`A client with id "${socket.id}" connected. (${clients.length} clients total)`);
+	
+	socket.on('disconnect', () => {
+		
+	});
+});

@@ -6,13 +6,13 @@
 	<link rel="stylesheet" href="css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<script src="classes/utils.js"></script>
+	<script src="scripts/classes/utils.js"></script>
+	<script src="scripts/classes/entity.js"></script>
+	<script src="scripts/classes/livingentity.js"></script>
+	<script src="scripts/classes/player.js"></script>
 	
-	<script src="classes/entity.js"></script>
-	<script src="classes/livingentity.js"></script>
-	<script src="classes/player.js"></script>
-	
-	<script src="client.js"></script>
+	<script src="scripts/client.js"></script>
+	<script src="scripts/gui.js"></script>
 	
 	<script src="p5/p5.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
@@ -20,7 +20,13 @@
 </head>
 
 <body>
-  
+  <div id="menu">
+		<div class="element">
+			<h3>IO Game</h3>
+			<input type="text" maxlength="15" id="myText" placeholder="Enter Name">
+			<button id="button" onclick="play()">Play</button>
+		</div>
+	</div>
 </body>
 
 </html>

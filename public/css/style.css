@@ -5,3 +5,38 @@ body {
   min-height: 100vh;
   margin: 0 auto;
 }
+
+button {
+	transition: 0.5s;
+	padding: 10px 15px 10px 15px;
+  border-radius: 5px;
+  background-color: black;
+  cursor: pointer;
+  color: white;
+  outline: none;
+  border: none;
+	text-align: center;
+	width: 50%;
+	margin-top: 20px;
+	display: inline-block;
+}
+
+button:hover {
+	background: hotpink;
+}
+
+.element {
+  float: left;
+  background-color: #333333;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: white;
+  text-align: center;
+  padding: 6px;
+  border-radius: 15px;
+  opacity: 0.8;
+  position: relative; z-index: 1;
+}
+
+#defaultCanvas0 {
+  position: absolute; top: 0; right: 0; left: 0; bottom: 0;
+}
