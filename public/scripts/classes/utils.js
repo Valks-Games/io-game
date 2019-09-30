@@ -1,9 +1,9 @@
 class Utils {
-	static angleTowardsMouse() {
-		const dx = winMouseX - width / 2;
-		const dy = winMouseY - height / 2;
-		const angle = Math.atan2(dy, dx);
+  static angleTowardsMouse() {
+    const dx = winMouseX - width / 2;
+    const dy = winMouseY - height / 2;
+    const angle = Math.atan2(dy, dx);
 
-		return angle;
-	}
+    return angle;
+  }
 }

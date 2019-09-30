@@ -110,12 +110,12 @@ function listener() {
       game.players[id] = new Player(player);
     }
   });
-  
+
   game.socket.on('player_transforms', function(data) {
     // The server does not care if the client is not ready for player transforms update.
     // This is why we have to check if the length is 0 in case game.players is not ready.
     if (Object.keys(game.players).length == 0) return;
-    
+
     const entries = Object.entries(data);
     for (const [id, player] of entries) {
       if (id == game.id) continue;
@@ -125,7 +125,7 @@ function listener() {
       theplayer.angle = player.angle;
     }
   });
-  
+
   game.socket.on('player_disconnected', function(data) {
     delete(game.players[data]);
   });

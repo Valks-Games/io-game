@@ -13,7 +13,7 @@ class Player extends LivingEntity {
     if (this.client) {
       this.angle = parseFloat(Utils.angleTowardsMouse().toFixed(2));
     }
-    
+
     if (this.angle != this.storedAngle) {
       game.sendData = true;
     }
@@ -21,14 +21,14 @@ class Player extends LivingEntity {
     this.drawNonRotatingElements();
     this.drawRotatingElements();
   }
-  
+
   drawNonRotatingElements() {
     push();
     fill(0);
     text(this.name, this.x - textWidth(this.name) / 2, this.y - this.size / 2 - textDescent());
     pop();
   }
-  
+
   drawRotatingElements() {
     push();
     translate(this.x, this.y);
