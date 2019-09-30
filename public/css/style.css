@@ -4,6 +4,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0 auto;
+  background-color: rgb(20, 20, 20);
 }
 
 button {
@@ -27,7 +28,7 @@ button:hover {
 
 .element {
   float: left;
-  background-color: #333333;
+  background-color: black;
   font-family: "Comic Sans MS", cursive, sans-serif;
   color: white;
   text-align: center;
