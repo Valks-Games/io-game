@@ -4,7 +4,7 @@ function play() {
     menu.style.display = 'block';
   } else {
     menu.style.display = 'none';
-    creatingPlayer = true;
-    playerName = document.getElementById('playerName').value;
+    game.creatingPlayer = true;
+    game.playerName = document.getElementById('playerName').value;
   }
 }

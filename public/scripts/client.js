@@ -1,34 +1,12 @@
-// Font
-let font;
-
-// Socket
-let socket;
-
-// Player
-let player;
-let playerName = "";
-let creatingPlayer = false;
-let playing = false;
-let players = [];
-let id;
-
-// Zoom
 const CAMERA_HEIGHT = 600;
-
 const ZOOM_HEIGHT_MAX = 0; // The smaller the value the 'higher' you can see..
 const ZOOM_HEIGHT_MIN = 500; // The larger the value the 'closer' you can see..
-
-let zoom = 0;
-let currentZoom = 0;
-
-// Cutscene Transition
 const CUTSCENE_STARTING_HEIGHT = 100;
 
-let cutSceneDropValue = 0;
+let game = new Game();
 
-//
 function preload() {
-  myFont = loadFont('./fonts/SourceSansPro-Black.otf');
+  game.font = loadFont('./fonts/SourceSansPro-Black.otf');
 }
 
 function windowResized() {
@@ -37,13 +15,13 @@ function windowResized() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  textFont(myFont);
+  textFont(game.font);
 }
 
 function draw() {
   setupPlayer();
 
-  if (playing) {
+  if (game.playing) {
     background(200);
 
     handleCamera();
@@ -55,55 +33,55 @@ function draw() {
 }
 
 function setupPlayer() {
-  if (creatingPlayer) {
-    player = new Player({
+  if (game.creatingPlayer) {
+    game.player = new Player({
       x: 100,
       y: 100,
       angle: 0,
       size: 25,
       health: 100,
-      name: playerName,
+      name: game.playerName,
       client: true
     });
 
-    socket = io.connect('http://localhost:7777/', { // Make connection
+    game.socket = io.connect('http://localhost:7777/', { // Make connection
       reconnect: true,
     });
 
-    socket.emit('new_player', {
-      x: player.x,
-      y: player.y,
-      name: player.name
+    game.socket.emit('new_player', {
+      x: game.player.x,
+      y: game.player.y,
+      name: game.player.name
     });
 
     listener();
 
-    creatingPlayer = false;
-    playing = true;
+    game.creatingPlayer = false;
+    game.playing = true;
   }
 }
 
 function drawPlayer() {
-  player.draw();
-  player.handleMovement();
+  game.player.draw();
+  game.player.handleMovement();
 }
 
 function drawPlayers() {
-  for (element of players) {
-    if (element.id == id) continue;
-    new Player(element).draw();
+  const players = Object.values(game.players);
+  for (const player of players) {
+    player.draw();
   }
 }
 
 function handleCamera() {
   // Lerp zoom changed by mouse wheel.
-  currentZoom = lerp(currentZoom, zoom, 0.02);
+  game.currentZoom = lerp(game.currentZoom, game.zoom, 0.02);
 
   // Lerp scene transition for a smooth effect.
-  cutSceneDropValue = lerp(cutSceneDropValue, CUTSCENE_STARTING_HEIGHT, 0.03);
+  game.cutSceneDropValue = lerp(game.cutSceneDropValue, CUTSCENE_STARTING_HEIGHT, 0.03);
 
-  let z = CAMERA_HEIGHT - currentZoom + CUTSCENE_STARTING_HEIGHT - cutSceneDropValue;
-  camera(player.x, player.y, z, player.x, player.y, 0, 0, 1, 0);
+  let z = CAMERA_HEIGHT - game.currentZoom + CUTSCENE_STARTING_HEIGHT - game.cutSceneDropValue;
+  camera(game.player.x, game.player.y, z, game.player.x, game.player.y, 0, 0, 1, 0);
 }
 
 function drawTree() {
@@ -115,17 +93,53 @@ function drawTree() {
 }
 
 function mouseWheel(event) {
-  if (zoom <= ZOOM_HEIGHT_MIN && zoom >= ZOOM_HEIGHT_MAX) zoom -= event.delta;
-  zoom = Math.min(zoom, ZOOM_HEIGHT_MIN);
-  zoom = Math.max(zoom, ZOOM_HEIGHT_MAX);
+  if (game.zoom <= ZOOM_HEIGHT_MIN && game.zoom >= ZOOM_HEIGHT_MAX) game.zoom -= event.delta;
+  game.zoom = Math.min(game.zoom, ZOOM_HEIGHT_MIN);
+  game.zoom = Math.max(game.zoom, ZOOM_HEIGHT_MAX);
 }
 
 function listener() {
-  socket.on('handshake', function(data) {
-    id = data;
+  game.socket.on('handshake', function(data) {
+    game.id = data;
   });
 
-  socket.on('players', function(data) {
-    players = data;
+  game.socket.on('players', function(data) {
+    const entries = Object.entries(data);
+    for (const [id, player] of entries) {
+      if (id == game.id) continue;
+      game.players[id] = new Player(player);
+    }
+  });
+  
+  game.socket.on('player_transforms', function(data) {
+    // The server does not care if the client is not ready for player transforms update.
+    // This is why we have to check if the length is 0 in case game.players is not ready.
+    if (Object.keys(game.players).length == 0) return;
+    
+    const entries = Object.entries(data);
+    for (const [id, player] of entries) {
+      if (id == game.id) continue;
+      let theplayer = game.players[id];
+      theplayer.x = player.x;
+      theplayer.y = player.y;
+      theplayer.angle = player.angle;
+    }
+  });
+  
+  game.socket.on('player_disconnected', function(data) {
+    delete(game.players[data]);
   });
 }
+
+setInterval(function() { // This is the client sending data to the server every 33 milliseconds. (Emit ourself (this client) to the server.)
+  if (game.sendData) {
+    game.sendData = false;
+    if (game.player) { // Only emit if the client exists.
+      game.socket.emit('player_transform', {
+        x: game.player.x,
+        y: game.player.y,
+        angle: game.player.angle
+      });
+    }
+  }
+}, 33);
