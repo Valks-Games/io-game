@@ -27,8 +27,24 @@ function draw() {
     handleCamera();
 
     drawPlayer();
+
     drawPlayers();
+
     drawTree(); // For reference.
+  }
+}
+
+function keyPressed() {
+  if (!game.playing) return;
+  if (!isChatHidden()) {
+    if (keyCode == ENTER) {
+      game.socket.emit('text', getChatText());
+      resetChat();
+    }
+  }
+
+  if (keyCode == ENTER) {
+    toggleChat();
   }
 }
 
@@ -100,13 +116,13 @@ function mouseWheel(event) {
 
 function listener() {
   game.socket.on('handshake', function(data) {
-    game.id = data;
+    game.player.id = data;
   });
 
   game.socket.on('players', function(data) {
     const entries = Object.entries(data);
     for (const [id, player] of entries) {
-      if (id == game.id) continue;
+      if (id == game.player.id) continue;
       game.players[id] = new Player(player);
     }
   });
@@ -118,11 +134,23 @@ function listener() {
 
     const entries = Object.entries(data);
     for (const [id, player] of entries) {
-      if (id == game.id) continue;
+      if (id == game.player.id) continue;
       let theplayer = game.players[id];
       theplayer.x = player.x;
       theplayer.y = player.y;
       theplayer.angle = player.angle;
+    }
+  });
+
+  game.socket.on('messages', function(data) {
+    const entries = Object.entries(data);
+    for (const [id, message] of entries) {
+      if (id == game.player.id) {
+        game.player.updateMessage(message.text);
+        continue;
+      }
+
+      game.players[id].updateMessage(message.text);
     }
   });
 

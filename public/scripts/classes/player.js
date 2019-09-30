@@ -1,12 +1,16 @@
 class Player extends LivingEntity {
   constructor(a) {
     super(a);
+    this.id = 0;
 
     this.name = a.name;
     this.client = a.client;
 
     this.size = 25;
     this.storedAngle = a.angle;
+
+    this.message = '';
+    this.storedMessage = '';
   }
 
   draw() {
@@ -18,8 +22,19 @@ class Player extends LivingEntity {
       game.sendData = true;
     }
 
-    this.drawNonRotatingElements();
     this.drawRotatingElements();
+    this.drawNonRotatingElements();
+  }
+
+  updateMessage(message) {
+    this.message = message;
+    setTimeout(() => {
+      this.clearMessage();
+    }, 1000);
+  }
+
+  clearMessage() {
+    this.message = '';
   }
 
   drawNonRotatingElements() {
@@ -27,6 +42,8 @@ class Player extends LivingEntity {
     fill(0);
     text(this.name, this.x - textWidth(this.name) / 2, this.y - this.size / 2 - textDescent());
     pop();
+
+    text(this.message, this.x, this.y);
   }
 
   drawRotatingElements() {
@@ -42,6 +59,8 @@ class Player extends LivingEntity {
   }
 
   handleMovement() {
+    if (!isChatHidden()) // Do not let player move if their typing a message.
+      return;
     if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
       this.x -= 1;
       game.sendData = true;

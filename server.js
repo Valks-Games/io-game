@@ -16,10 +16,12 @@ const io = socket(server); // Waiting for client. Listen out for when the connec
 
 // Classes
 const Utils = require('./classes/utils.js');
+const Message = require('./classes/message.js');
 const Player = require('./classes/player.js');
 const PlayerTransform = require('./classes/playertransform.js');
 
 let players = {};
+let messages = {};
 
 setInterval(() => {
   let player_transforms = {};
@@ -61,6 +63,14 @@ io.on('connection', (socket) => {
       player.y = data.y;
       player.angle = data.angle;
     }
+  });
+
+  socket.on('text', (data) => {
+    messages[socket.id] = new Message({
+      text: data
+    });
+
+    io.sockets.emit('messages', messages);
   });
 
   socket.on('disconnect', () => {

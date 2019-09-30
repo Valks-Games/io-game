@@ -7,13 +7,15 @@ class Game {
     this.socket;
     this.sendData = false;
 
+    // Objects
+    this.players = {};
+    this.messages = {};
+
     // Player
     this.player;
     this.playerName = "";
     this.creatingPlayer = false;
     this.playing = false;
-    this.players = {};
-    this.id;
 
     // Zoom
     this.zoom = 0;

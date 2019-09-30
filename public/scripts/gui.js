@@ -8,3 +8,25 @@ function play() {
     game.playerName = document.getElementById('playerName').value;
   }
 }
+
+function toggleChat() {
+  const chat = document.getElementById('chat');
+  if (chat.style.display === 'none') {
+    chat.style.display = 'block';
+    chat.focus();
+  } else {
+    chat.style.display = 'none';
+  }
+}
+
+function isChatHidden() {
+  return document.getElementById('chat').style.display === 'none';
+}
+
+function getChatText() {
+  return document.getElementById('chat').value;
+}
+
+function resetChat() {
+  document.getElementById('chat').value = '';
+}

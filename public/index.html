@@ -10,6 +10,7 @@
 	<script src="scripts/classes/entity.js"></script>
 	<script src="scripts/classes/livingentity.js"></script>
 	<script src="scripts/classes/player.js"></script>
+	<script src="scripts/classes/message.js"></script>
 
 	<script src="scripts/game.js"></script>
 	<script src="scripts/client.js"></script>
@@ -28,6 +29,13 @@
 			<button id="button" onclick="play()">Play</button>
 		</div>
 	</div>
+
+	<div class="chat">
+		<input type="text" maxlength="100" id="chat" value="" autofocus>
+	</div>
+	<script>
+    toggleChat();
+  </script>
 </body>
 
 </html>
