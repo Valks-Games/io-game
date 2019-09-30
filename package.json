@@ -1,0 +1,29 @@
+{
+  "name": "io-game-v2",
+  "version": "1.0.0",
+  "description": "Networking with sockets.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valkyrienyanko/io-game-v2.git"
+  },
+  "keywords": [
+    "socket.io",
+    "p5.js"
+  ],
+  "author": "valkyrienyanko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valkyrienyanko/io-game-v2/issues"
+  },
+  "homepage": "https://github.com/valkyrienyanko/io-game-v2#readme"
+}
