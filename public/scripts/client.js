@@ -143,14 +143,10 @@ function listener() {
   });
 
   game.socket.on('messages', function(data) {
-    const entries = Object.entries(data);
-    for (const [id, message] of entries) {
-      if (id == game.player.id) {
-        game.player.updateMessage(message.text);
-        continue;
-      }
-
-      game.players[id].updateMessage(message.text);
+    if (data.id == game.player.id) {
+      game.player.updateMessage(data.text);
+    } else {
+      game.players[data.id].updateMessage(data.text);
     }
   });
 

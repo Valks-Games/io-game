@@ -38,6 +38,10 @@ setInterval(() => {
   io.sockets.emit('player_transforms', player_transforms);
 }, 33);
 
+setInterval(() => {
+  console.log(messages);
+}, 1000);
+
 io.on('connection', (socket) => {
   socket.on('new_player', (data) => {
     players[socket.id] = new Player({
@@ -70,7 +74,10 @@ io.on('connection', (socket) => {
       text: data
     });
 
-    io.sockets.emit('messages', messages);
+    io.sockets.emit('messages', {
+      text: data,
+      id: socket.id
+    });
   });
 
   socket.on('disconnect', () => {
