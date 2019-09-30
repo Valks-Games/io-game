@@ -4,8 +4,9 @@ const config = require('./config.json');
 
 // App setup
 const app = express();
-const server = app.listen(7777, () => {
-  console.log('Server is running on port 7777');
+const port = process.env.PORT || 7777;
+const server = app.listen(port, () => {
+  console.log('Server is running on port ' + port);
 });
 
 // Static files

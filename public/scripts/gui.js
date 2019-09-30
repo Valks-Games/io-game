@@ -9,6 +9,11 @@ function play() {
   }
 }
 
+function displayMenu() {
+  const menu = document.getElementById('menu');
+  menu.style.display = 'block';
+}
+
 function toggleChat() {
   const chat = document.getElementById('chat');
   if (chat.style.display === 'none') {

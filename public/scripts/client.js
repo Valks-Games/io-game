@@ -158,6 +158,16 @@ function listener() {
   game.socket.on('player_disconnected', function(data) {
     delete(game.players[data]);
   });
+
+  game.socket.on('disconnect', (reason) => {
+    // Server closed.
+    if (reason === 'transport close') {
+      displayMenu();
+      background(20, 20, 20);
+      game.playing = false;
+      game.socket.disconnect();
+    }
+  });
 }
 
 setInterval(function() { // This is the client sending data to the server every 33 milliseconds. (Emit ourself (this client) to the server.)
