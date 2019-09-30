@@ -11,6 +11,8 @@ class Player extends LivingEntity {
 
     this.message = '';
     this.storedMessage = '';
+
+    this.messageTimeout;
   }
 
   draw() {
@@ -27,10 +29,11 @@ class Player extends LivingEntity {
   }
 
   updateMessage(message) {
+    clearTimeout(this.messageTimeout);
     this.message = message;
-    setTimeout(() => {
+    this.messageTimeout = setTimeout(() => {
       this.clearMessage();
-    }, 1000);
+    }, 10 * 1000);
   }
 
   clearMessage() {
@@ -38,12 +41,28 @@ class Player extends LivingEntity {
   }
 
   drawNonRotatingElements() {
+    this.drawName();
+    this.drawMessage();
+  }
+
+  drawName() {
     push();
     fill(0);
     text(this.name, this.x - textWidth(this.name) / 2, this.y - this.size / 2 - textDescent());
     pop();
+  }
 
-    text(this.message, this.x, this.y);
+  drawMessage() {
+    if (this.message == '') return;
+    push();
+    fill(0, 200);
+    const padding = 2;
+    noStroke();
+    rect(this.x - textWidth(this.message) / 2 - padding, this.y - this.size / 1.5 - textAscent() * 2 + padding, textWidth(this.message) + padding * 2, textAscent(), 20);
+    fill(255);
+    text(this.message, this.x - textWidth(this.message) / 2, this.y - this.size / 1.5 - textAscent());
+    stroke(0);
+    pop();
   }
 
   drawRotatingElements() {

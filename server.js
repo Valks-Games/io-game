@@ -21,7 +21,6 @@ const Player = require('./classes/player.js');
 const PlayerTransform = require('./classes/playertransform.js');
 
 let players = {};
-let messages = {};
 
 setInterval(() => {
   let player_transforms = {};
@@ -37,10 +36,6 @@ setInterval(() => {
 
   io.sockets.emit('player_transforms', player_transforms);
 }, 33);
-
-setInterval(() => {
-  console.log(messages);
-}, 1000);
 
 io.on('connection', (socket) => {
   socket.on('new_player', (data) => {
@@ -70,13 +65,9 @@ io.on('connection', (socket) => {
   });
 
   socket.on('text', (data) => {
-    messages[socket.id] = new Message({
-      text: data
-    });
-
     io.sockets.emit('messages', {
-      text: data,
-      id: socket.id
+      id: socket.id,
+      text: data
     });
   });
 

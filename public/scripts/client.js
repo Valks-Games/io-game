@@ -38,8 +38,11 @@ function keyPressed() {
   if (!game.playing) return;
   if (!isChatHidden()) {
     if (keyCode == ENTER) {
-      game.socket.emit('text', getChatText());
-      resetChat();
+      let text = getChatText();
+      if (text != '') {
+        game.socket.emit('text', getChatText());
+        resetChat();
+      }
     }
   }
 
@@ -60,7 +63,9 @@ function setupPlayer() {
       client: true
     });
 
-    game.socket = io.connect('http://localhost:7777/', { // Make connection
+    let url = getURL(); // This way we can dynamically switch between localhost and external ips.
+
+    game.socket = io.connect(url, { // Make connection
       reconnect: true,
     });
 

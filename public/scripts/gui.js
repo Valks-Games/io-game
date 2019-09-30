@@ -30,3 +30,7 @@ function getChatText() {
 function resetChat() {
   document.getElementById('chat').value = '';
 }
+
+function getURL() {
+  return window.location.href;
+}
