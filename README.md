@@ -10,12 +10,18 @@ If you're using nodemon, the server will automatically restart whenever code has
 
 ## Debugging
 
+### Server
+The server will spit out errors directly to the server console. If you're using nodemon, it will stop and try again when changes are made to any of the files.
+
 ### Browser
 Viewing the developer console depends on which browser you're using. Here are some hotkeys to take note of.
 
 | Chrome                 | Firefox               | Opera                  |
 | ---------------------- | --------------------- | ---------------------- |
 | `CTRL` + `SHIFT` + `J` | `CTRL` + `SHIFT` + `J`| `CTRL` + `SHIFT` + `I` |
+
+### Electron
+An external debugger will automatically be attached if you run the app through `run-app.cmd`.
 
 ## Resources
 
