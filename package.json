@@ -2,23 +2,20 @@
   "name": "io-game-v2",
   "version": "1.0.0",
   "description": "Networking with sockets.",
-  "main": "server.js",
+  "main": "./app/main.js",
   "dependencies": {
     "express": "^4.17.1",
-    "socket.io": "^2.3.0",
-    "yarn": "^1.19.0",
-    "source-map-support": "^0.5.13"
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "electron": "^6.0.10",
     "electron-builder": "^21.2.0",
-    "electron-webpack": "^2.7.4",
     "webpack": "~4.41.0"
   },
   "scripts": {
-    "test": "node server.js",
-    "start": "node server.js",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -35,28 +32,26 @@
   },
   "homepage": "https://github.com/valkyrienyanko/io-game-v2#readme",
   "build": {
-    "appId": "com.electron.iogame",
-    "mac": {
-      "category": "your.app.category.type"
+    "appId": "me.valk.iogame",
+    "productName": "IO Game",
+    "target": "NSIS",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
     },
-    "files": [
-      {
-        "from": ".",
-        "to": ".",
-        "filter": [
-            "electron",
-            "images",
-            "node_modules",
-            "main.js",
-            "package.json"
-        ]
-        },
-        {
-            "from": "./xxx/build",
-            "to": ".",
-            "filter": ["**/*"]
-        }
-    ],
-    "extends": null
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "build/installerIcon.ico",
+      "installerHeaderIcon": "build/installerHeaderIcon.ico",
+      "uninstallerIcon": "build/uninstallerIcon.ico",
+      "uninstallDisplayName": "${productName} ${version}",
+      "artifactName": "${productName} ${version}.${ext}",
+      "deleteAppDataOnUninstall": true,
+      "runAfterFinish": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "menuCategory": false,
+      "shortcutName": "${productName}"
+    }
   }
 }

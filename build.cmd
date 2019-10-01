@@ -1,0 +1,2 @@
+yarn run dist
+PAUSE
