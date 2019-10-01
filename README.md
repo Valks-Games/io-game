@@ -10,7 +10,7 @@ If you're using nodemon, the server will automatically restart whenever code has
 
 ## Debugging
 
-When debugging the client inside your browser, you will need to figure out how to open the console depending on what browser you are using.
+When debugging the client inside your browser, you will need to figure out how to open the console depending on what browser you are using. Here are hotkeys to open up console for different browsers.
 
 #### Chrome
 `CTRL` + `SHIFT` + `J`
