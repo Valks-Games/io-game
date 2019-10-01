@@ -160,7 +160,9 @@ function listener() {
     if (data.id == game.player.id) {
       game.player.updateMessage(data.text);
     } else {
-      game.players[data.id].updateMessage(data.text);
+      // Should we delete the player at game.players[data.id] here? Or just check if its not undefined??
+      if (game.players[data.id] != undefined)
+        game.players[data.id].updateMessage(data.text);
     }
   });
 
@@ -170,6 +172,7 @@ function listener() {
 
   game.socket.on('disconnect', (reason) => {
     // Server closed.
+    console.log(reason);
     if (reason === 'transport close') {
       location.reload();
     }
