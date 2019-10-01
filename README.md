@@ -4,7 +4,7 @@
 2. Download and install `LTS` [Node.js](https://nodejs.org/en/).
 3. Run `install-dependencies.bat`.
 4. Start server with `start-server.bat`.
-5. Port forward a port like '7777'. (TCP)
+5. Port forward a port like '7777'. (TCP) If you are having troubles with port forwarding read [this guide](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/).
 6. Create a client by opening up `https://localhost:7777/` in your browser.
 
 If you're using a port other then '7777', make sure that you change the env PORT in the `start-server.bat`.
