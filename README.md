@@ -13,11 +13,12 @@ The server will automatically restart whenever code has been changed. If you eve
 
 ## Resources
 
-- [p5.js API](https://p5js.org/reference/)
-- [Express API](https://expressjs.com/en/api.html)
-- [Socket.io API](https://socket.io/docs/)
-- [Electron.js API](https://electronjs.org/docs)
-- [Nodemon API](https://github.com/remy/nodemon/blob/master/README.md)
+### APIs
+- [p5.js](https://p5js.org/reference/)
+- [Express](https://expressjs.com/en/api.html)
+- [Socket.io](https://socket.io/docs/)
+- [Electron.js](https://electronjs.org/docs)
+- [Nodemon](https://github.com/remy/nodemon/blob/master/README.md)
 
 ## Contributing
 
