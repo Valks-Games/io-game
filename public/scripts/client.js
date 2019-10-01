@@ -70,15 +70,17 @@ function setupPlayer() {
       autoconnect: false
     });
 
-    game.socket.on('connect', function() {
-      console.log(game.socket.connected);
-    });
-
     game.socket.emit('new_player', {
       x: game.player.x,
       y: game.player.y,
       name: game.player.name
     });
+
+    game.socket.on('connect', function() {
+      console.log(game.socket.connected);
+    });
+
+
 
     listener();
 
@@ -130,14 +132,12 @@ function listener() {
   });
 
   game.socket.on('players', function(data) {
-    console.log("WHOOPS");
     const entries = Object.entries(data);
     for (const [id, player] of entries) {
       if (game.player == null) continue;
       if (id == game.player.id) continue;
       game.players[id] = new Player(player);
     }
-    console.log(game.players.length);
   });
 
   game.socket.on('player_transforms', function(data) {
@@ -171,13 +171,7 @@ function listener() {
   game.socket.on('disconnect', (reason) => {
     // Server closed.
     if (reason === 'transport close') {
-      displayMenu();
-      background(20, 20, 20);
-      game.players = {};
-      game.messages = {};
-      game.player = null;
-
-      game.playing = false;
+      location.reload();
     }
   });
 }
