@@ -16,6 +16,7 @@ The server will automatically restart whenever code has been changed. If you eve
 - [p5.js API](https://p5js.org/reference/)
 - [Express API](https://expressjs.com/en/api.html)
 - [Socket.io API](https://socket.io/docs/)
+- [Electron.js API](https://electronjs.org/docs)
 - [Nodemon API](https://github.com/remy/nodemon/blob/master/README.md)
 
 ## Contributing
