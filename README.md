@@ -8,6 +8,16 @@
 
 If you're using nodemon, the server will automatically restart whenever code has been changed. If you ever need to restart the server manually you can do so with the `rs` command.
 
+## Debugging
+
+When debugging the client inside your browser, you will need to figure out how to open the console depending on what browser you are using.
+
+#### Chrome
+`CTRL` + `SHIFT` + `J`
+
+#### Opera
+`CTRL` + `SHIFT` + `I`
+
 ## Resources
 
 ### APIs
