@@ -15,6 +15,9 @@ When debugging the client inside your browser, you will need to figure out how t
 #### Chrome
 `CTRL` + `SHIFT` + `J`
 
+#### Firefox
+`CTRL` + `SHIFT` + `J`
+
 #### Opera
 `CTRL` + `SHIFT` + `I`
 
