@@ -1,7 +1,7 @@
 ### Setup
 
 1. Clone `https://github.com/valkyrienyanko/io-game-v2.git`.
-2. Download and install [Node.js](https://nodejs.org/en/). (Recommended version)
+2. Download and install `LTS` [Node.js](https://nodejs.org/en/).
 3. Run `install-dependencies.bat`.
 4. Start server with `start-server.bat`.
 5. Port forward a port like '7777'. (TCP)
