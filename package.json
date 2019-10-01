@@ -5,12 +5,20 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "yarn": "^1.19.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "electron": "^6.0.10",
+    "electron-builder": "^21.0.11",
+    "electron-webpack": "^2.7.4",
+    "webpack": "~4.35.3"
+  },
   "scripts": {
     "test": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
   },
   "repository": {
     "type": "git",
@@ -25,5 +33,11 @@
   "bugs": {
     "url": "https://github.com/valkyrienyanko/io-game-v2/issues"
   },
-  "homepage": "https://github.com/valkyrienyanko/io-game-v2#readme"
+  "homepage": "https://github.com/valkyrienyanko/io-game-v2#readme",
+  "build": {
+    "appId": "com.electron.iogame",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  }
 }
