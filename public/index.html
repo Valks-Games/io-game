@@ -21,7 +21,7 @@
 	<!--Socket.io latest links can be found at https://cdnjs.com/libraries/socket.io-->
 </head>
 
-<body>
+<body oncontextmenu="return false">
   <div id="menu">
 		<div class="element">
 			<h3>IO Game</h3>
@@ -30,9 +30,13 @@
 		</div>
 	</div>
 
-	<div class="chat">
-		<input type="text" maxlength="100" id="chat" value="" autofocus>
+	<div class="chat" id="chatBox">
+		<textarea class="history" id="history" rows="1" value="" readonly></textarea>
+		<div class="input">
+			<input type="text" maxlength="100" id="chat" value="">
+		</div>
 	</div>
+
 	<script>
     toggleChat();
   </script>

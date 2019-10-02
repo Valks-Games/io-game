@@ -5,20 +5,20 @@ const CUTSCENE_STARTING_HEIGHT = 100
 
 const game = new Game()
 
-function preload () {
+function preload() {
   game.font = loadFont('./fonts/SourceSansPro-Black.otf')
 }
 
-function windowResized () {
+function windowResized() {
   resizeCanvas(windowWidth, windowHeight)
 }
 
-function setup () {
+function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL)
   textFont(game.font)
 }
 
-function draw () {
+function draw() {
   setupPlayer()
 
   if (game.playing) {
@@ -34,7 +34,7 @@ function draw () {
   }
 }
 
-function keyPressed () {
+function keyPressed() {
   if (!game.playing) return
   if (!isChatHidden()) {
     if (keyCode == ENTER) {
@@ -51,7 +51,7 @@ function keyPressed () {
   }
 }
 
-function setupPlayer () {
+function setupPlayer() {
   if (game.creatingPlayer) {
     game.player = new Player({
       x: 100,
@@ -87,19 +87,19 @@ function setupPlayer () {
   }
 }
 
-function drawPlayer () {
+function drawPlayer() {
   game.player.draw()
   game.player.handleMovement()
 }
 
-function drawPlayers () {
+function drawPlayers() {
   const players = Object.values(game.players)
   for (const player of players) {
     player.draw()
   }
 }
 
-function handleCamera () {
+function handleCamera() {
   // Lerp zoom changed by mouse wheel.
   game.currentZoom = lerp(game.currentZoom, game.zoom, 0.02)
 
@@ -110,7 +110,7 @@ function handleCamera () {
   camera(game.player.x, game.player.y, z, game.player.x, game.player.y, 0, 0, 1, 0)
 }
 
-function drawTree () {
+function drawTree() {
   push()
   stroke(0)
   fill(94, 120, 117)
@@ -118,13 +118,13 @@ function drawTree () {
   pop()
 }
 
-function mouseWheel (event) {
+function mouseWheel(event) {
   if (game.zoom <= ZOOM_HEIGHT_MIN && game.zoom >= ZOOM_HEIGHT_MAX) game.zoom -= event.delta
   game.zoom = Math.min(game.zoom, ZOOM_HEIGHT_MIN)
   game.zoom = Math.max(game.zoom, ZOOM_HEIGHT_MAX)
 }
 
-function listener () {
+function listener() {
   game.socket.on('handshake', function (data) {
     game.player.id = data
   })
@@ -135,6 +135,7 @@ function listener () {
       if (game.player == null) continue
       if (id == game.player.id) continue
       game.players[id] = new Player(player)
+      logChatMessage(`Player ${game.players[id].name} has connected`)
     }
   })
 
@@ -156,15 +157,20 @@ function listener () {
 
   game.socket.on('messages', function (data) {
     if (data.id == game.player.id) {
+      logChatMessage(`${game.player.name}: ${data.text}`)
       game.player.updateMessage(data.text)
     } else {
       // Should we delete the player at game.players[data.id] here? Or just check if its not undefined??
-      if (game.players[data.id] != undefined) { game.players[data.id].updateMessage(data.text) }
+      if (game.players[data.id] != undefined) {
+        logChatMessage(`${game.players[data.id].name}: ${data.text}`)
+        game.players[data.id].updateMessage(data.text)
+      }
     }
   })
 
-  game.socket.on('player_disconnected', function (data) {
-    delete (game.players[data])
+  game.socket.on('player_disconnected', function (id) {
+    logChatMessage(`Player ${game.players[id].name} has disconnected`)
+    delete (game.players[id])
   })
 
   game.socket.on('disconnect', (reason) => {
@@ -175,6 +181,8 @@ function listener () {
     }
   })
 }
+
+
 
 setInterval(function () { // This is the client sending data to the server every 33 milliseconds. (Emit ourself (this client) to the server.)
   if (game.sendData) {
@@ -188,3 +196,7 @@ setInterval(function () { // This is the client sending data to the server every
     }
   }
 }, 33)
+
+function logChatMessage(message) {
+  document.getElementById("history").value += `${message}\n`;
+}
