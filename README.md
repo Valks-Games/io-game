@@ -1,3 +1,9 @@
+![Preview](https://i.gyazo.com/cd58edd4ea727bf35e0494689b07cfe0.png)
+
+## What is IO-Game?
+
+IO-Game networking prototype using sockets and express to communicate over the network, p5.js for the graphics and input, and electron.js for cross-platform support. The end goal is to create a online RPG syncing over various elements such as NPCs, chat messages and other transforms.
+
 ## Setup
 
 1. Clone `https://github.com/valkyrienyanko/io-game-v2.git`.
