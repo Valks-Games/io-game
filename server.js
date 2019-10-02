@@ -53,7 +53,7 @@ io.on('connection', (socket) => {
   socket.on('player_transform', (data) => {
     const player = players[socket.id]
 
-    if (!player) {
+    if (player !== undefined) {
       player.x = data.x
       player.y = data.y
       player.angle = data.angle

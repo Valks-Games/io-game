@@ -147,7 +147,7 @@ function listener () {
     for (const [id, player] of entries) {
       if (game.player == null) continue
       if (id == game.player.id) continue
-      const theplayer = game.players[id]
+      let theplayer = game.players[id]
       theplayer.x = player.x
       theplayer.y = player.y
       theplayer.angle = player.angle
