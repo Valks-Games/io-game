@@ -49,4 +49,6 @@ An external debugger will automatically be attached if you run the app through `
 ## Contributing
 See [CONTRIBUTING.md](https://github.com/valkyrienyanko/io-game-v2/blob/master/CONTRIBUTING.md)
 
+Join the [discord](https://discord.gg/6qVaeaN)! Talk to other team project members!
+
 If you have any questions, talk to me on discord **valk#3277**.
