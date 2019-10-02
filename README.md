@@ -39,6 +39,6 @@ An external debugger will automatically be attached if you run the app through `
 - [Nodemon](https://github.com/remy/nodemon/blob/master/README.md)
 
 ## Contributing
-Use the linter with `lint:fix` to follow the global standard format.
+See [CONTRIBUTING.md](https://github.com/valkyrienyanko/io-game-v2/blob/master/CONTRIBUTING.md)
 
 If you have any questions, talk to me on discord **valk#3277**.
