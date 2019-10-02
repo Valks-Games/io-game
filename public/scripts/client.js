@@ -5,8 +5,11 @@ const CUTSCENE_STARTING_HEIGHT = 100
 
 const game = new Game()
 
-function preload() {
+let tree
+
+function preload () {
   game.font = loadFont('./fonts/SourceSansPro-Black.otf')
+  tree = loadModel('./assets/tree.obj')
 }
 
 function windowResized() {
@@ -30,7 +33,7 @@ function draw() {
 
     drawPlayers()
 
-    drawTree()
+    drawReference()
   }
 }
 
@@ -54,8 +57,8 @@ function keyPressed() {
 function setupPlayer() {
   if (game.creatingPlayer) {
     game.player = new Player({
-      x: 100,
-      y: 100,
+      x: 0,
+      y: 0,
       angle: 0,
       size: 25,
       health: 100,
@@ -110,11 +113,32 @@ function handleCamera() {
   camera(game.player.x, game.player.y, z, game.player.x, game.player.y, 0, 0, 1, 0)
 }
 
-function drawTree() {
+function drawReference () {
   push()
   stroke(0)
+  
   fill(94, 120, 117)
-  sphere(50)
+  
+  sphere(50);
+  
+  /*scale(10)
+  noStroke()
+  
+  const spacing = 9
+  const amount = 10
+  
+  for (let x = -amount / 2; x < amount; x++) {
+    for (let z = -amount / 2; z < amount; z++) {
+      rotateX(frameCount * 0.00005)
+      rotateY(frameCount * 0.00005)
+      rotateZ(frameCount * 0.00005)
+      translate(x * spacing, 0, z * spacing)
+      model(tree)
+      translate(-x * spacing, 0, -z * spacing);
+    }
+  }*/
+  
+  
   pop()
 }
 
