@@ -2,57 +2,36 @@
   "name": "io-game-v2",
   "version": "0.1.6",
   "description": "Networking with sockets.",
-  "main": "./app/main.js",
+  "main": "server.js",
+  "repository": "git+https://github.com/valkyrienyanko/io-game-v2.git",
+  "homepage": "https://github.com/valkyrienyanko/io-game-v2#readme",
+  "bugs": "https://github.com/valkyrienyanko/io-game-v2/issues",
+  "author": "valkyrienyanko",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "express": "^4.17.1",
+    "nodemon": "^1.19.3",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "electron": "^6.0.10",
-    "electron-builder": "^21.2.0",
-    "standard": "^14.3.1",
-    "webpack": "~4.41.0"
+    "eslint": "^6.5.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "standard": "^14.3.1"
   },
   "scripts": {
-    "dist": "electron-builder",
-    "postinstall": "electron-builder install-app-deps",
-    "start": "electron ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/valkyrienyanko/io-game-v2.git"
+    "dev:client": "cd app/ && yarn dev",
+    "dev:server": "nodemon .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "build": "cd app/ && yarn build",
+    "postinstall": "cd app/ && yarn install"
   },
   "keywords": [
     "socket.io",
     "p5.js"
-  ],
-  "author": "valkyrienyanko",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/valkyrienyanko/io-game-v2/issues"
-  },
-  "homepage": "https://github.com/valkyrienyanko/io-game-v2#readme",
-  "build": {
-    "appId": "me.valk.iogame",
-    "productName": "IO Game",
-    "target": "NSIS",
-    "directories": {
-      "buildResources": "build",
-      "output": "dist"
-    },
-    "nsis": {
-      "oneClick": true,
-      "installerIcon": "build/installerIcon.ico",
-      "installerHeaderIcon": "build/installerHeaderIcon.ico",
-      "uninstallerIcon": "build/uninstallerIcon.ico",
-      "uninstallDisplayName": "${productName} ${version}",
-      "artifactName": "${productName} ${version} Setup.${ext}",
-      "deleteAppDataOnUninstall": true,
-      "runAfterFinish": false,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "menuCategory": false,
-      "shortcutName": "${productName}"
-    }
-  }
+  ]
 }

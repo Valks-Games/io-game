@@ -1,0 +1,43 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "repository": "git+https://github.com/valkyrienyanko/io-game-v2.git",
+  "homepage": "https://github.com/valkyrienyanko/io-game-v2#readme",
+  "bugs": "https://github.com/valkyrienyanko/io-game-v2/issues",
+  "author": "valkyrienyanko",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "dev": "cd app/ && electron --inspect=7777 .",
+    "build": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "devDependencies": {
+    "electron": "^6.0.11",
+    "electron-builder": "^21.2.0"
+  },
+  "build": {
+    "appId": "me.valk.iogame",
+    "productName": "IO Game",
+    "target": "NSIS",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "build/installerIcon.ico",
+      "installerHeaderIcon": "build/installerHeaderIcon.ico",
+      "uninstallerIcon": "build/uninstallerIcon.ico",
+      "uninstallDisplayName": "${productName} ${version}",
+      "artifactName": "${productName} ${version} Setup.${ext}",
+      "deleteAppDataOnUninstall": true,
+      "runAfterFinish": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "menuCategory": false,
+      "shortcutName": "${productName}"
+    }
+  }
+}
