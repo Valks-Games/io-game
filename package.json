@@ -1,6 +1,6 @@
 {
   "name": "io-game-v2",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "description": "Networking with sockets.",
   "main": "./app/main.js",
   "dependencies": {
