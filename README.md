@@ -10,6 +10,10 @@
 If you're using nodemon, the server will automatically restart whenever code has been changed. If you ever need to restart the server manually you can do so with the `rs` command.
 Nodemon is used by default when using `yarn dev:server`. You can use `node .` instead if you prefer.
 
+## Building
+
+Use `yarn build` to build the electron app.
+
 ## Debugging
 
 ### Server
