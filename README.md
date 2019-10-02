@@ -25,11 +25,6 @@ Viewing the developer console depends on which browser you're using. Here are so
 ### Electron
 An external debugger will automatically be attached if you run the app through `yarn dev:client`.
 
-## Contributing
-If you would like to contribute, look at CONTRIBUTING.md
-
-If you have any questions, talk to me on discord **valk#3277**.
-
 ## Resources
 
 ### Libraries
@@ -38,3 +33,8 @@ If you have any questions, talk to me on discord **valk#3277**.
 - [Socket.io](https://socket.io/docs/)
 - [Electron.js](https://electronjs.org/docs)
 - [Nodemon](https://github.com/remy/nodemon/blob/master/README.md)
+
+## Contributing
+If you would like to contribute, look at [CONTRIBUTING.md](https://github.com/valkyrienyanko/io-game-v2/blob/master/CONTRIBUTING.md).
+
+If you have any questions, talk to me on discord **valk#3277**.
