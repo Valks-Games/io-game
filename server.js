@@ -1,4 +1,4 @@
-const express = require('express') 
+const express = require('express')
 const socket = require('socket.io')
 
 // const Utils = require('./model/util.js')
