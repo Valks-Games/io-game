@@ -9,7 +9,7 @@
   "author": "valkyrienyanko",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "dev": "cd app/ && electron --inspect=7777 .",
+    "dev": "electron --inspect=7777 .",
     "build": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
