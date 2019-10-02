@@ -8,8 +8,29 @@ body {
 }
 
 .chat {
-  position: absolute; z-index: 1;
-  top: 90%;
+  position: absolute;
+  padding: 8px;
+  z-index: 1;
+  bottom: 2%;
+  left: 2%;
+  height: 200px;
+  background-color: grey;
+  opacity: 40%;
+  display: none;
+}
+
+.chat .history {
+  width:200px;
+  height:88%; 
+  box-sizing: border-box;         /* For IE and modern versions of Chrome */
+  -moz-box-sizing: border-box;    /* For Firefox                          */
+  -webkit-box-sizing: border-box; /* For Safari                           */
+  resize: horizontal;
+  opacity: 40%;
+}
+
+.chat .input {  
+  bottom: 8px;
 }
 
 button {

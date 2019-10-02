@@ -1,9 +1,12 @@
 function play () {
   const menu = document.getElementById('menu')
+  const chatBox = document.getElementById('chatBox')
   if (menu.style.display === 'none') {
     menu.style.display = 'block'
+    chatBox.style.display = 'none'
   } else {
     menu.style.display = 'none'
+    chatBox.style.display = 'block'
     game.creatingPlayer = true
     game.playerName = document.getElementById('playerName').value
   }
@@ -16,16 +19,15 @@ function displayMenu () {
 
 function toggleChat () {
   const chat = document.getElementById('chat')
-  if (chat.style.display === 'none') {
-    chat.style.display = 'block'
+  if (isChatHidden()) {
     chat.focus()
   } else {
-    chat.style.display = 'none'
+    chat.blur()
   }
 }
 
 function isChatHidden () {
-  return document.getElementById('chat').style.display === 'none'
+  return document.activeElement !== chat
 }
 
 function getChatText () {
