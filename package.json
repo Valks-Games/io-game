@@ -10,6 +10,7 @@
   "devDependencies": {
     "electron": "^6.0.10",
     "electron-builder": "^21.2.0",
+    "standard": "^14.3.1",
     "webpack": "~4.41.0"
   },
   "scripts": {
@@ -45,7 +46,7 @@
       "installerHeaderIcon": "build/installerHeaderIcon.ico",
       "uninstallerIcon": "build/uninstallerIcon.ico",
       "uninstallDisplayName": "${productName} ${version}",
-      "artifactName": "${productName} ${version}.${ext}",
+      "artifactName": "${productName} ${version} Setup.${ext}",
       "deleteAppDataOnUninstall": true,
       "runAfterFinish": false,
       "createDesktopShortcut": true,

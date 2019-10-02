@@ -1,4 +1,3 @@
 @ECHO OFF
-mode con: cols=30 lines=3
 echo Running..
-electron app/main.js
+electron --inspect=7777 app/main.js
