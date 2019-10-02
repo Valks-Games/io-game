@@ -30,7 +30,7 @@ function draw () {
 
     drawPlayers()
 
-    drawTree() // For reference.
+    drawTree()
   }
 }
 

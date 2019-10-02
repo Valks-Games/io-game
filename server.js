@@ -1,41 +1,39 @@
 const express = require('express')
 const socket = require('socket.io')
-const config = require('./config.json')
 
-// App setup
+// const Utils = require('./model/util.js')
+// const Message = require('./model/Message.js')
+const Player = require('./model/Player.js')
+const PlayerTransform = require('./model/PlayerTransform.js')
+
+// const config = require('./config.json')
+
 const app = express()
 const port = process.env.PORT || 7777
+
+app.use(express.static('public'))
+
 const server = app.listen(port, () => {
   console.log('Server is running on port ' + port)
 })
 
-// Static files
-app.use(express.static('public'))
-
-// Socket setup
-const io = socket(server) // Waiting for client. Listen out for when the connection is made..
-
-// Classes
-const Utils = require('./classes/utils.js')
-const Message = require('./classes/message.js')
-const Player = require('./classes/player.js')
-const PlayerTransform = require('./classes/playertransform.js')
+const io = socket(server)
 
 const players = {}
 
 setInterval(() => {
-  const player_transforms = {}
+  const playerTransforms = {}
 
   const entries = Object.entries(players)
   for (const [key, value] of entries) {
-    player_transforms[key] = new PlayerTransform({
+    playerTransforms[key] = new PlayerTransform({
       x: value.x,
       y: value.y,
       angle: value.angle
     })
   }
 
-  io.sockets.emit('player_transforms', player_transforms)
+  io.sockets.emit('player_transforms', playerTransforms)
 }, 33)
 
 io.on('connection', (socket) => {
@@ -46,10 +44,7 @@ io.on('connection', (socket) => {
       name: data.name
     })
 
-    // socket.emit sends to ONE client.
-    socket.emit('handshake', socket.id) // So the client can tell what id they are..
-
-    // io.sockets.emit sends to ALL clients.
+    socket.emit('handshake', socket.id)
     io.sockets.emit('players', players)
 
     console.log(`${socket.id} joined. (${Object.keys(players).length} players total)`)
@@ -58,7 +53,7 @@ io.on('connection', (socket) => {
   socket.on('player_transform', (data) => {
     const player = players[socket.id]
 
-    if (player != undefined) {
+    if (!player) {
       player.x = data.x
       player.y = data.y
       player.angle = data.angle
@@ -73,7 +68,6 @@ io.on('connection', (socket) => {
   })
 
   socket.on('disconnect', () => {
-    // Remove the player that disconnected from the array of players.
     delete players[socket.id]
 
     io.sockets.emit('player_disconnected', socket.id)

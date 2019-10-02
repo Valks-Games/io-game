@@ -17,7 +17,7 @@ class Player extends LivingEntity {
 
   draw () {
     if (this.client) {
-      this.angle = parseFloat(Utils.angleTowardsMouse().toFixed(2))
+      this.angle = parseFloat(angleTowardsMouse().toFixed(2))
     }
 
     if (this.angle != this.storedAngle) {

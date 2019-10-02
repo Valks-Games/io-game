@@ -1,2 +1,0 @@
-yarn run dist
-PAUSE

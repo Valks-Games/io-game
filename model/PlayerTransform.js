@@ -1,5 +1,5 @@
 // The transform player class.
-module.exports = class Player {
+module.exports = class PlayerTransform {
   constructor (a) {
     this.x = a.x
     this.y = a.y
