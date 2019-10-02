@@ -28,6 +28,8 @@ An external debugger will automatically be attached if you run the app through `
 ## Contributing
 If you would like to contribute, look at CONTRIBUTING.md
 
+If you have any questions, talk to me on discord **valk#3277**.
+
 ## Resources
 
 ### Libraries
@@ -36,7 +38,3 @@ If you would like to contribute, look at CONTRIBUTING.md
 - [Socket.io](https://socket.io/docs/)
 - [Electron.js](https://electronjs.org/docs)
 - [Nodemon](https://github.com/remy/nodemon/blob/master/README.md)
-
-## Contributing
-
-Talk to me on discord **valk#3277**.
