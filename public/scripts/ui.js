@@ -19,7 +19,7 @@ function displayMenu() {
 
 function toggleChat() {
   const chat = document.getElementById('chat')
-  if (Chat.isChatFocused()) {
+  if (!Chat.isChatFocused()) {
     chat.focus()
   } else {
     chat.blur()

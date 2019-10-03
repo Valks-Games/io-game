@@ -1,13 +1,18 @@
+const CAMERA_HEIGHT = 10
+const ZOOM_HEIGHT_MAX = -3 // The smaller the value the 'higher' you can see..
+const ZOOM_HEIGHT_MIN = 6 // The larger the value the 'closer' you can see..
+const CUTSCENE_STARTING_HEIGHT = 50
+
 var scene = new THREE.Scene()
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 )
 
-var renderer = new THREE.WebGLRenderer()
+var renderer = new THREE.WebGLRenderer(
+{
+  antilias: true
+})
 renderer.setSize( window.innerWidth, window.innerHeight )
 document.body.appendChild( renderer.domElement )
 
-
-
-camera.position.z = 5;
 
 const game = new Game()
 
@@ -16,6 +21,13 @@ animate()
 window.addEventListener( 'resize', onWindowResize, false )
 window.addEventListener( 'keydown', onKeyDown)
 window.addEventListener( 'keyup', onKeyUp)
+window.addEventListener( 'wheel', onMouseScroll)
+
+function onMouseScroll(e) {
+  if (game.zoom <= ZOOM_HEIGHT_MIN && game.zoom >= ZOOM_HEIGHT_MAX) game.zoom -= e.deltaY / 250 / 1.5
+  game.zoom = Math.min(game.zoom, ZOOM_HEIGHT_MIN)
+  game.zoom = Math.max(game.zoom, ZOOM_HEIGHT_MAX)
+}
 
 function handleChat(key) {
   if (!game.playing) return
@@ -29,7 +41,6 @@ function handleChat(key) {
       }
       
       Chat.blurChat()
-      //toggleChat() <-- Does not seem to do anything?
     }
   }
 }
@@ -85,10 +96,23 @@ function onWindowResize(){
     renderer.setSize( window.innerWidth, window.innerHeight)
 }
 
+function handleCamera() {
+  // Lerp zoom changed by mouse wheel.
+  game.currentZoom = THREE.Math.lerp(game.currentZoom, game.zoom, 0.02)
+
+  // Lerp scene transition for a smooth effect.
+  game.cutSceneDropValue = THREE.Math.lerp(game.cutSceneDropValue, CUTSCENE_STARTING_HEIGHT, 0.03)
+  
+  const z = CAMERA_HEIGHT - game.currentZoom + CUTSCENE_STARTING_HEIGHT - game.cutSceneDropValue
+  camera.position.z = z;
+
+}
+
 function animate() {
   setupPlayer()
   
   if (game.playing) {
+    handleCamera()
     handlePlayerMovement()
   }
   
@@ -105,15 +129,19 @@ function handlePlayerMovement() {
     return
   if (game.player.movingUp){
     game.player.move(new THREE.Vector3(0, 1, 0), 0.05)
+    game.sendData = true
   } 
   if (game.player.movingDown){
     game.player.move(new THREE.Vector3(0, -1, 0), 0.05)
+    game.sendData = true
   } 
   if (game.player.movingRight){
     game.player.move(new THREE.Vector3(1, 0, 0), 0.05)
+    game.sendData = true
   } 
   if (game.player.movingLeft){
     game.player.move(new THREE.Vector3(-1, 0, 0), 0.05)
+    game.sendData = true
   }
 }
 
@@ -146,14 +174,14 @@ function setupPlayer() {
       console.log(game.socket.connected)
     })
 
-    listener()
+    socketListener()
 
     game.creatingPlayer = false
     game.playing = true
   }
 }
 
-function listener() {
+function socketListener() {
   game.socket.on('handshake', function (data) {
     Chat.logChatMessage(`Connected to ${getURL()}`, false)
     game.player.id = data
@@ -214,3 +242,16 @@ function listener() {
     }
   })
 }
+
+setInterval(function () { // This is the client sending data to the server every 33 milliseconds. (Emit ourself (this client) to the server.)
+  if (game.sendData) {
+    game.sendData = false
+    if (game.player) { // Only emit if the client exists.
+      game.socket.emit('player_transform', {
+        x: game.player.x,
+        y: game.player.y,
+        angle: game.player.angle
+      })
+    }
+  }
+}, 33)
