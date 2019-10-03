@@ -1,52 +1,141 @@
-const CAMERA_HEIGHT = 600
-const ZOOM_HEIGHT_MAX = 0 // The smaller the value the 'higher' you can see..
-const ZOOM_HEIGHT_MIN = 500 // The larger the value the 'closer' you can see..
-const CUTSCENE_STARTING_HEIGHT = 100
+const CAMERA_HEIGHT = 10
+const ZOOM_HEIGHT_MAX = -3 // The smaller the value the 'higher' you can see..
+const ZOOM_HEIGHT_MIN = 6 // The larger the value the 'closer' you can see..
+const CUTSCENE_STARTING_HEIGHT = 50
+
+var scene = new THREE.Scene()
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+
+var renderer = new THREE.WebGLRenderer(
+  {
+    antilias: true
+  })
+renderer.setSize(window.innerWidth, window.innerHeight)
+document.body.appendChild(renderer.domElement)
+
 
 const game = new Game()
 
-let tree
+animate()
 
-function preload() {
-  game.font = loadFont('./fonts/SourceSansPro-Black.otf')
-  tree = loadModel('./assets/tree.obj')
+window.addEventListener('resize', onWindowResize, false)
+window.addEventListener('keydown', onKeyDown)
+window.addEventListener('keyup', onKeyUp)
+window.addEventListener('wheel', onMouseScroll)
+
+function onMouseScroll(e) {
+  if (game.zoom <= ZOOM_HEIGHT_MIN && game.zoom >= ZOOM_HEIGHT_MAX) game.zoom -= e.deltaY / 250 / 1.5
+  game.zoom = Math.min(game.zoom, ZOOM_HEIGHT_MIN)
+  game.zoom = Math.max(game.zoom, ZOOM_HEIGHT_MAX)
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight)
-}
-
-function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL)
-  textFont(game.font)
-}
-
-function draw() {
-  setupPlayer()
-
-  if (game.playing) {
-    background(200)
-
-    handleCamera()
-
-    drawPlayer()
-
-    drawPlayers()
-
-    drawReference()
+function handleChat(key) {
+  if (key == "Enter") {
+    if (!Chat.isChatFocused() && !Chat.isInputEmpty()) {
+      game.socket.emit('text', Chat.filterMessage(Chat.getInputText()))
+      Chat.resetInput()
+    }
+    Chat.toggle()
   }
 }
 
-function keyPressed() {
-  if (!game.playing) return
-  if (keyCode == ENTER) {
-    if (!Chat.isChatFocused()) {
-      if (!Chat.isInputEmpty()) {
-        game.socket.emit('text', Chat.filterMessage(Chat.getInputText()))
-        Chat.resetInput()
-      }
+function onKeyDown(e) {
+  if (game.playing) {
+    handleChat(e.key)
+
+    switch (e.key) {
+      case "w":
+        game.player.movingUp = true
+        break
+      case "a":
+        game.player.movingLeft = true
+        break
+      case "s":
+        game.player.movingDown = true
+        break
+      case "d":
+        game.player.movingRight = true
+        break
+      default:
+        break
     }
-    Chat.toggle()
+  }
+}
+
+function onKeyUp(e) {
+  if (game.playing) {
+    switch (e.key) {
+      case "w":
+        game.player.movingUp = false
+        break
+      case "a":
+        game.player.movingLeft = false
+        break
+      case "s":
+        game.player.movingDown = false
+        break
+      case "d":
+        game.player.movingRight = false
+        break
+      default:
+        break
+    }
+  }
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+
+  renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
+function handleCamera() {
+  // Lerp zoom changed by mouse wheel.
+  game.currentZoom = THREE.Math.lerp(game.currentZoom, game.zoom, 0.02)
+
+  // Lerp scene transition for a smooth effect.
+  game.cutSceneDropValue = THREE.Math.lerp(game.cutSceneDropValue, CUTSCENE_STARTING_HEIGHT, 0.03)
+
+  const z = CAMERA_HEIGHT - game.currentZoom + CUTSCENE_STARTING_HEIGHT - game.cutSceneDropValue
+  camera.position.z = z;
+
+}
+
+function animate() {
+  setupPlayer()
+
+  if (game.playing) {
+    handleCamera()
+    handlePlayerMovement()
+  }
+
+  requestAnimationFrame(animate);
+
+  //cube.rotation.x += 0.01;
+  //cube.rotation.y += 0.01;
+
+  renderer.render(scene, camera);
+}
+
+function handlePlayerMovement() {
+  if (!Chat.isChatFocused()) // Do not let player move if their typing a message.
+    return
+  if (game.player.movingUp) {
+    game.player.move(new THREE.Vector3(0, 1, 0), 0.05)
+    game.sendData = true
+  }
+  if (game.player.movingDown) {
+    game.player.move(new THREE.Vector3(0, -1, 0), 0.05)
+    game.sendData = true
+  }
+  if (game.player.movingRight) {
+    game.player.move(new THREE.Vector3(1, 0, 0), 0.05)
+    game.sendData = true
+  }
+  if (game.player.movingLeft) {
+    game.player.move(new THREE.Vector3(-1, 0, 0), 0.05)
+    game.sendData = true
   }
 }
 
@@ -79,72 +168,14 @@ function setupPlayer() {
       console.log(game.socket.connected)
     })
 
-    listener()
+    socketListener()
 
     game.creatingPlayer = false
     game.playing = true
   }
 }
 
-function drawPlayer() {
-  game.player.draw()
-  game.player.handleMovement()
-}
-
-function drawPlayers() {
-  const players = Object.values(game.players)
-  for (const player of players) {
-    player.draw()
-  }
-}
-
-function handleCamera() {
-  // Lerp zoom changed by mouse wheel.
-  game.currentZoom = lerp(game.currentZoom, game.zoom, 0.02)
-
-  // Lerp scene transition for a smooth effect.
-  game.cutSceneDropValue = lerp(game.cutSceneDropValue, CUTSCENE_STARTING_HEIGHT, 0.03)
-
-  const z = CAMERA_HEIGHT - game.currentZoom + CUTSCENE_STARTING_HEIGHT - game.cutSceneDropValue
-  camera(game.player.x, game.player.y, z, game.player.x, game.player.y, 0, 0, 1, 0)
-}
-
-function drawReference() {
-  push()
-  stroke(0)
-
-  fill(94, 120, 117)
-
-  sphere(50);
-
-  /*scale(10)
-  noStroke()
-  
-  const spacing = 9
-  const amount = 10
-  
-  for (let x = -amount / 2; x < amount; x++) {
-    for (let z = -amount / 2; z < amount; z++) {
-      rotateX(frameCount * 0.00005)
-      rotateY(frameCount * 0.00005)
-      rotateZ(frameCount * 0.00005)
-      translate(x * spacing, 0, z * spacing)
-      model(tree)
-      translate(-x * spacing, 0, -z * spacing);
-    }
-  }*/
-
-
-  pop()
-}
-
-function mouseWheel(event) {
-  if (game.zoom <= ZOOM_HEIGHT_MIN && game.zoom >= ZOOM_HEIGHT_MAX) game.zoom -= event.delta
-  game.zoom = Math.min(game.zoom, ZOOM_HEIGHT_MIN)
-  game.zoom = Math.max(game.zoom, ZOOM_HEIGHT_MAX)
-}
-
-function listener() {
+function socketListener() {
   game.socket.on('handshake', function (data) {
     Chat.logChatMessage(`Connected to ${getURL()}`, false)
     game.player.id = data
