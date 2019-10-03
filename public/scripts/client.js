@@ -182,7 +182,7 @@ function listener() {
 
   game.socket.on('messages', function (data) {
     if (data.id == game.player.id) {
-      Chat.logChatMessage(`${game.player.name}: ${data.text}`)
+      Chat.logChatMessage(`${game.player.name}: ${data.text}`, true, true)
       game.player.updateMessage(data.text)
     } else {
       // Should we delete the player at game.players[data.id] here? Or just check if its not undefined??
