@@ -28,6 +28,7 @@ body {
   -webkit-box-sizing: border-box; /* For Safari                           */
   resize: horizontal;
   opacity: 40%;
+  outline: none;
 }
 
 .chat .input {  

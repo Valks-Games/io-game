@@ -22,7 +22,7 @@ class Chat {
 
         // If is at the bottom of the scroll, auto update the chat
         if (canUpdate || forceUpdate) {
-            history.scrollTop = history.scrollHeight
+            Chat.scrollToBottom()
         }
     }
 
@@ -37,6 +37,11 @@ class Chat {
             // Scrolled to top
             return false
         }
+    }
+
+    static scrollToBottom(){
+        const history = Chat.getElement(HTMLClasses.history)
+        history.scrollTop = history.scrollHeight
     }
 
     // Check if chat text input is focused

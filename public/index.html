@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
 	<script src="scripts/model/util.js"></script>
 	<script src="scripts/model/Entity.js"></script>
 	<script src="scripts/model/LivingEntity.js"></script>
@@ -23,7 +24,7 @@
 </head>
 
 <body oncontextmenu="return false">
-  <div id="menu">
+	<div id="menu">
 		<div class="element">
 			<h3>IO Game</h3>
 			<input type="text" maxlength="15" id="playerName" placeholder="Enter Name">
@@ -32,15 +33,15 @@
 	</div>
 
 	<div class="chat" id="chatBox">
-		<textarea class="history" id="history" rows="1" value="" readonly></textarea>
+		<textarea class="history" id="history" onresize="onChatResize()" rows="1" value="" readonly></textarea>
 		<div class="input">
 			<input type="text" maxlength="100" id="chat" value="">
 		</div>
 	</div>
 
 	<script>
-    toggleChat();
-  </script>
+		toggleChat();
+	</script>
 </body>
 
 </html>

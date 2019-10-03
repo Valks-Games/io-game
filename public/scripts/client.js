@@ -44,12 +44,9 @@ function keyPressed() {
       if (!Chat.isInputEmpty()) {
         game.socket.emit('text', Chat.getInputText())
         Chat.resetInput()
-      } else {
-        toggleChat()
       }
-    } else {
-      toggleChat()
     }
+    toggleChat()
   }
 }
 
@@ -163,7 +160,7 @@ function listener() {
         Chat.logChatMessage(`Player ${game.players[id].name} has connected`)
     }
     if (!game.firstSetupDone)
-      game.setup = true
+      game.firstSetupDone = true
   })
 
   game.socket.on('player_transforms', function (data) {
