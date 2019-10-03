@@ -4,16 +4,18 @@
 <head>
 	<link rel="shortcut icon" href="#">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/gui.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="scripts/model/util.js"></script>
 	<script src="scripts/model/Entity.js"></script>
 	<script src="scripts/model/LivingEntity.js"></script>
 	<script src="scripts/model/Player.js"></script>
 	<script src="scripts/model/Message.js"></script>
 	<script src="scripts/model/Game.js"></script>
-	<script src="scripts/model/Chat.js"></script>
+	<script src="scripts/model/GUI/Chat.js"></script>
+	<script src="scripts/model/GUI/UI.js"></script>
 
 	<script src="scripts/client.js"></script>
 	<script src="scripts/ui.js"></script>
@@ -31,17 +33,6 @@
 			<button id="button" onclick="play()">Play</button>
 		</div>
 	</div>
-
-	<div class="chat" id="chatBox">
-		<textarea class="history" id="history" onresize="onChatResize()" rows="1" value="" readonly></textarea>
-		<div class="input">
-			<input type="text" maxlength="100" id="chat" value="">
-		</div>
-	</div>
-
-	<script>
-		toggleChat();
-	</script>
 </body>
 
 </html>

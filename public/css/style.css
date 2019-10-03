@@ -7,34 +7,6 @@ body {
   background-color: rgb(20, 20, 20);
 }
 
-.chat {
-  position: absolute;
-  padding: 8px;
-  z-index: 1;
-  bottom: 2%;
-  left: 2%;
-  height: 200px;
-  background-color: grey;
-  opacity: 40%;
-  display: none;
-}
-
-.chat .history {
-  min-width: 200px;
-  max-width: 600px;
-  height:88%; 
-  box-sizing: border-box;         /* For IE and modern versions of Chrome */
-  -moz-box-sizing: border-box;    /* For Firefox                          */
-  -webkit-box-sizing: border-box; /* For Safari                           */
-  resize: horizontal;
-  opacity: 40%;
-  outline: none;
-}
-
-.chat .input {  
-  bottom: 8px;
-}
-
 button {
 	transition: 0.5s;
 	padding: 10px 15px 10px 15px;

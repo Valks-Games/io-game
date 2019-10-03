@@ -42,11 +42,11 @@ function keyPressed() {
   if (keyCode == ENTER) {
     if (!Chat.isChatFocused()) {
       if (!Chat.isInputEmpty()) {
-        game.socket.emit('text', Chat.getInputText())
+        game.socket.emit('text', Chat.filterMessage(Chat.getInputText()))
         Chat.resetInput()
       }
     }
-    toggleChat()
+    Chat.toggle()
   }
 }
 
