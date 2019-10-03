@@ -7,7 +7,7 @@ const game = new Game()
 
 let tree
 
-function preload () {
+function preload() {
   game.font = loadFont('./fonts/SourceSansPro-Black.otf')
   tree = loadModel('./assets/tree.obj')
 }
@@ -39,17 +39,13 @@ function draw() {
 
 function keyPressed() {
   if (!game.playing) return
-  if (!isChatHidden()) {
-    if (keyCode == ENTER) {
-      const text = getChatText()
-      if (text != '') {
-        game.socket.emit('text', getChatText())
-        resetChat()
+  if (keyCode == ENTER) {
+    if (!Chat.isChatFocused()) {
+      if (!Chat.isInputEmpty()) {
+        game.socket.emit('text', Chat.getInputText())
+        Chat.resetInput()
       }
     }
-  }
-
-  if (keyCode == ENTER) {
     toggleChat()
   }
 }
@@ -113,14 +109,14 @@ function handleCamera() {
   camera(game.player.x, game.player.y, z, game.player.x, game.player.y, 0, 0, 1, 0)
 }
 
-function drawReference () {
+function drawReference() {
   push()
   stroke(0)
-  
+
   fill(94, 120, 117)
-  
+
   sphere(50);
-  
+
   /*scale(10)
   noStroke()
   
@@ -137,8 +133,8 @@ function drawReference () {
       translate(-x * spacing, 0, -z * spacing);
     }
   }*/
-  
-  
+
+
   pop()
 }
 
@@ -150,6 +146,7 @@ function mouseWheel(event) {
 
 function listener() {
   game.socket.on('handshake', function (data) {
+    Chat.logChatMessage(`Connected to ${getURL()}`, false)
     game.player.id = data
   })
 
@@ -159,8 +156,11 @@ function listener() {
       if (game.player == null) continue
       if (id == game.player.id) continue
       game.players[id] = new Player(player)
-      logChatMessage(`Player ${game.players[id].name} has connected`)
+      if (game.firstSetupDone)
+        Chat.logChatMessage(`Player ${game.players[id].name} has connected`)
     }
+    if (!game.firstSetupDone)
+      game.firstSetupDone = true
   })
 
   game.socket.on('player_transforms', function (data) {
@@ -181,19 +181,19 @@ function listener() {
 
   game.socket.on('messages', function (data) {
     if (data.id == game.player.id) {
-      logChatMessage(`${game.player.name}: ${data.text}`)
+      Chat.logChatMessage(`${game.player.name}: ${data.text}`, true, true)
       game.player.updateMessage(data.text)
     } else {
       // Should we delete the player at game.players[data.id] here? Or just check if its not undefined??
       if (game.players[data.id] != undefined) {
-        logChatMessage(`${game.players[data.id].name}: ${data.text}`)
+        Chat.logChatMessage(`${game.players[data.id].name}: ${data.text}`)
         game.players[data.id].updateMessage(data.text)
       }
     }
   })
 
   game.socket.on('player_disconnected', function (id) {
-    logChatMessage(`Player ${game.players[id].name} has disconnected`)
+    Chat.logChatMessage(`Player ${game.players[id].name} has disconnected`)
     delete (game.players[id])
   })
 
@@ -205,8 +205,6 @@ function listener() {
     }
   })
 }
-
-
 
 setInterval(function () { // This is the client sending data to the server every 33 milliseconds. (Emit ourself (this client) to the server.)
   if (game.sendData) {
@@ -220,7 +218,3 @@ setInterval(function () { // This is the client sending data to the server every
     }
   }
 }, 33)
-
-function logChatMessage(message) {
-  document.getElementById("history").value += `${message}\n`;
-}

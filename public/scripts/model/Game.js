@@ -1,5 +1,8 @@
 class Game {
   constructor () {
+
+    this.firstSetupDone = false
+
     // Font
     this.font
 
