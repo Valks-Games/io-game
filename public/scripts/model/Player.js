@@ -78,7 +78,7 @@ class Player extends LivingEntity {
   }
 
   handleMovement () {
-    if (!isChatHidden()) // Do not let player move if their typing a message.
+    if (!Chat.isChatFocused()) // Do not let player move if their typing a message.
     { return }
     if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
       this.x -= 1

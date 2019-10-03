@@ -20,7 +20,8 @@ body {
 }
 
 .chat .history {
-  width:200px;
+  min-width: 200px;
+  max-width: 600px;
   height:88%; 
   box-sizing: border-box;         /* For IE and modern versions of Chrome */
   -moz-box-sizing: border-box;    /* For Firefox                          */

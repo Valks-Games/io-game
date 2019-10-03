@@ -19,23 +19,11 @@ function displayMenu () {
 
 function toggleChat () {
   const chat = document.getElementById('chat')
-  if (isChatHidden()) {
+  if (Chat.isChatFocused()) {
     chat.focus()
   } else {
     chat.blur()
   }
-}
-
-function isChatHidden () {
-  return document.activeElement !== chat
-}
-
-function getChatText () {
-  return document.getElementById('chat').value
-}
-
-function resetChat () {
-  document.getElementById('chat').value = ''
 }
 
 function getURL () {
