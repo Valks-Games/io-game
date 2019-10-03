@@ -13,6 +13,16 @@ class Player extends LivingEntity {
     this.storedMessage = ''
 
     this.messageTimeout
+    
+    this.geometry = new THREE.BoxGeometry( 1, 1, 1 )
+    this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
+    this.cube = new THREE.Mesh( this.geometry, this.material )
+    scene.add( this.cube )
+    
+    this.movingUp
+    this.movingDown
+    this.movingLeft
+    this.movingRight
   }
 
   draw () {
@@ -24,8 +34,8 @@ class Player extends LivingEntity {
       game.sendData = true
     }
 
-    this.drawRotatingElements()
-    this.drawNonRotatingElements()
+    //this.drawRotatingElements()
+    //this.drawNonRotatingElements()
   }
 
   updateMessage (message) {
@@ -65,7 +75,7 @@ class Player extends LivingEntity {
     pop()
   }
 
-  drawRotatingElements () {
+  /*drawRotatingElements () {
     push()
     translate(this.x, this.y)
     rotate(this.angle + PI + PI / 2)
@@ -75,9 +85,18 @@ class Player extends LivingEntity {
     ellipse(this.x, this.y + this.size / 4, this.size / 4, this.size / 4)
 
     pop()
+  }*/
+  
+  move(direction, speed) {
+    this.cube.translateOnAxis(direction, speed)
+  }
+  
+  handleMovement(){
+    //if (
+    this.cube.translateOnAxis(new THREE.Vector3(0, 1, 0), 0.1)
   }
 
-  handleMovement () {
+  /*handleMovement () {
     if (!Chat.isChatFocused()) // Do not let player move if their typing a message.
     { return }
     if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
@@ -96,5 +115,5 @@ class Player extends LivingEntity {
       this.y -= 1
       game.sendData = true
     }
-  }
+  }*/
 }

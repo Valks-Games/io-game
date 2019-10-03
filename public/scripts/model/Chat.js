@@ -46,12 +46,22 @@ class Chat {
 
     // Check if chat text input is focused
     static isChatFocused() {
-        return document.activeElement !== Chat.getElement(HTMLClasses.input)
+        return document.activeElement === Chat.getElement(HTMLClasses.input)
     }
 
     // Get chat text input text
     static getInputText() {
         return Chat.getElement(HTMLClasses.input).value
+    }
+    
+    // Focus on chat.
+    static focusChat() {
+      Chat.getElement(HTMLClasses.input).focus()
+    }
+    
+    // Remove focus on chat.
+    static blurChat() {
+      Chat.getElement(HTMLClasses.input).blur()
     }
 
     // Check if chat text input is empty
