@@ -41,13 +41,15 @@ function keyPressed() {
   if (!game.playing) return
   if (keyCode == ENTER) {
     if (!Chat.isChatFocused()) {
-      const text = Chat.getInputText()
-      if (text != '') {
+      if (!Chat.isInputEmpty()) {
         game.socket.emit('text', Chat.getInputText())
         Chat.resetInput()
+      } else {
+        toggleChat()
       }
+    } else {
+      toggleChat()
     }
-    toggleChat()
   }
 }
 
@@ -159,9 +161,9 @@ function listener() {
       game.players[id] = new Player(player)
       if (game.firstSetupDone)
         Chat.logChatMessage(`Player ${game.players[id].name} has connected`)
-      }
-      if (!game.firstSetupDone)
-        game.setup = true
+    }
+    if (!game.firstSetupDone)
+      game.setup = true
   })
 
   game.socket.on('player_transforms', function (data) {

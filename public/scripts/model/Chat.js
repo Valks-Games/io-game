@@ -49,6 +49,11 @@ class Chat {
         return Chat.getElement(HTMLClasses.input).value
     }
 
+    // Check if chat text input is empty
+    static isInputEmpty() {
+        return Chat.getInputText() == ''
+    }
+
     // Resets chat text input text
     static resetInput() {
         Chat.getElement(HTMLClasses.input).value = ''
