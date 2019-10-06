@@ -1,0 +1,35 @@
+.UIContainer {
+    position: absolute;
+    z-index: 1;
+    background-color: grey;
+    opacity: 0.8;
+  }
+  
+  .UIContainer .content {
+    padding: 8px 8px 8px 8px;
+    min-height: 100px;
+  }
+  
+  .UIContainer .header {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;
+  }
+  
+  .UIContainer .history {
+    width: 300px;
+    min-width: 200px;
+    max-width: 600px;
+    height:200px; 
+    box-sizing: border-box;         /* For IE and modern versions of Chrome */
+    -moz-box-sizing: border-box;    /* For Firefox                          */
+    -webkit-box-sizing: border-box; /* For Safari                           */
+    resize: horizontal;
+    outline: none;
+  }
+  
+  .UIContainer .input {  
+    bottom: 8px;
+  }  
