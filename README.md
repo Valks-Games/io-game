@@ -1,4 +1,4 @@
-![Preview](https://i.gyazo.com/cd58edd4ea727bf35e0494689b07cfe0.png)
+![Preview](https://i.imgur.com/a4xPtfI.png)
 
 ## What is IO-Game?
 
