@@ -6,10 +6,12 @@ const CUTSCENE_STARTING_HEIGHT = 100
 const game = new Game()
 
 let tree
+let rock
 
 function preload() {
   game.font = loadFont('./fonts/SourceSansPro-Black.otf')
   tree = loadModel('./assets/tree.obj')
+  rock = loadModel('./assets/rock.obj')
 }
 
 function windowResized() {
@@ -17,6 +19,7 @@ function windowResized() {
 }
 
 function setup() {
+  pixelDensity(2.0); // Default is 2.0
   createCanvas(windowWidth, windowHeight, WEBGL)
   textFont(game.font)
 }
@@ -25,14 +28,14 @@ function draw() {
   setupPlayer()
 
   if (game.playing) {
-    background(200)
+    background(100, 150, 100)
 
     handleCamera()
-
+    
     drawPlayer()
 
     drawPlayers()
-
+    
     drawReference()
   }
 }
@@ -75,13 +78,15 @@ function setupPlayer() {
     })
 
     game.socket.on('connect', function () {
-      console.log(game.socket.connected)
+      console.log('Connected: ' + game.socket.connected)
     })
 
     listener()
 
     game.creatingPlayer = false
     game.playing = true
+    
+    // fullscreen(true) // Set fullscreen on play.
   }
 }
 
@@ -110,30 +115,34 @@ function handleCamera() {
 
 function drawReference() {
   push()
+  translate(0, -450, 0)
+  fill(50)
+  strokeWeight(1)
+  scale(50) // Scale offsets the rock for some reason?
+  model(rock)
+  pop()
+  
+  
+  push()
   stroke(0)
 
-  fill(94, 120, 117)
+  fill(55, 120, 55)
 
-  sphere(50);
+  scale(50)
+  stroke(0, 50, 0);
+  strokeWeight(3);
 
-  /*scale(10)
-  noStroke()
   
-  const spacing = 9
-  const amount = 10
-  
+  const spacing = 6
+  const amount = 5
+  rotateX(HALF_PI)
   for (let x = -amount / 2; x < amount; x++) {
     for (let z = -amount / 2; z < amount; z++) {
-      rotateX(frameCount * 0.00005)
-      rotateY(frameCount * 0.00005)
-      rotateZ(frameCount * 0.00005)
       translate(x * spacing, 0, z * spacing)
       model(tree)
       translate(-x * spacing, 0, -z * spacing);
     }
-  }*/
-
-
+  }
   pop()
 }
 

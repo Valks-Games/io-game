@@ -1,7 +1,7 @@
 .UIContainer {
   position: absolute;
   z-index: 1;
-  background-color: grey;
+  background-color: rgb(0,0,0);
   opacity: 0.8;
 }
 
@@ -14,7 +14,7 @@
   padding: 10px;
   cursor: move;
   z-index: 10;
-  background-color: #2196F3;
+  background-color: rgb(30,30,30);
   color: #fff;
 }
 
@@ -23,16 +23,25 @@
   min-width: 200px;
   max-width: 600px;
   height: 200px;
-  box-sizing: border-box;
-         /* For IE and modern versions of Chrome */
-  -moz-box-sizing: border-box;
-    /* For Firefox                          */
-  -webkit-box-sizing: border-box;
- /* For Safari                           */
-  resize: horizontal;
+  box-sizing: border-box;   
+  -moz-box-sizing: border-box; /* For IE and modern versions of Chrome */
+  -webkit-box-sizing: border-box; /* For Firefox */
+  resize: horizontal; /* For Safari */
   outline: none;
+	background-color: black;
+	color: white;
+	border: 0;
 }
 
 .UIContainer .input {
   bottom: 8px;
+}
+
+#input {
+	background-color: black;
+	color: white;
+	outline: none;
+	border-color: rgb(20, 20, 20);
+	border-style: dashed;
+	width: 50%;
 }

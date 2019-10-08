@@ -70,6 +70,8 @@ class Player extends LivingEntity {
     translate(this.x, this.y)
     rotate(this.angle + PI + PI / 2)
     translate(-this.x, -this.y)
+    
+    strokeWeight(2)
 
     ellipse(this.x, this.y, this.size, this.size)
     ellipse(this.x, this.y + this.size / 4, this.size / 4, this.size / 4)
