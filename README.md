@@ -35,7 +35,7 @@ Viewing the developer console depends on which browser you're using. Here are so
 | `CTRL` + `SHIFT` + `J` | `CTRL` + `SHIFT` + `J`| `CTRL` + `SHIFT` + `I` |
 
 ### Electron
-An external debugger will automatically be attached if you run the app through `yarn dev:client`.
+An external debugger will automatically be attached if you run the app through `yarn dev:client`. Note that this has not been tested and may not even be the right way to go about debugging electron.
 
 ## Resources
 
