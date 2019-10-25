@@ -1,6 +1,6 @@
 ---
 name: 'Question'
-about: 'A question at hand'
+about: 'State your question.'
 title: ''
 labels: 'question'
 assignees: ''
