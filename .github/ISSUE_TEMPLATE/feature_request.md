@@ -1,6 +1,6 @@
 ---
 name: 'Feature Request'
-about: 'Request a Feature'
+about: 'Request a feature.'
 title: ''
 labels: 'enhancement'
 assignees: ''
