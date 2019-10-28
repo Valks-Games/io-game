@@ -37,11 +37,16 @@ function draw() {
     drawPlayers()
     
     drawReference()
+    
+    if (keyIsDown(32) || mouseIsPressed) {
+      game.player.attacking = true
+    }
   }
 }
 
 function keyPressed() {
   if (!game.playing) return
+  
   if (keyCode == ENTER) {
     if (!Chat.isChatFocused() && !Chat.isInputEmpty()) {
       game.socket.emit('text', Chat.filterMessage(Chat.getInputText()))
@@ -93,6 +98,7 @@ function setupPlayer() {
 function drawPlayer() {
   game.player.draw()
   game.player.handleMovement()
+  game.player.handleAttack()
 }
 
 function drawPlayers() {

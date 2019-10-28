@@ -15,6 +15,7 @@ function displayMenu() {
   menu.style.display = 'block'
 }
 
-function getURL() {
+// p5.js already has a function defined with this name.
+/*function getURL() {
   return window.location.href
-}
+}*/

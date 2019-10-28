@@ -24,7 +24,7 @@
   },
   "scripts": {
     "dev:client": "cd app/ && yarn dev",
-    "dev:server": "nodemon .",
+    "dev:server": "nodemon --quiet .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "build": "cd app/ && yarn build",

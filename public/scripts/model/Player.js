@@ -13,13 +13,62 @@ class Player extends LivingEntity {
     this.storedMessage = ''
 
     this.messageTimeout
+    
+    this.swingBack = false
+    this.swingRefAngleRetrieved = false
+    this.swingRefAngle
+    this.attacking = false
+    this.recovering = false
+    this.counter = 0
   }
 
   draw () {
     if (this.client) {
-      this.angle = parseFloat(angleTowardsMouse().toFixed(2))
+      const delay = 20 * 1 // 1 second
+      
+      // Recover delay between attacks.
+      if (this.recovering) {
+        this.counter = this.counter + 1
+        if (this.counter >= delay) {
+          this.recovering = false
+          this.counter = 0
+        }
+      }
+      
+      // Attack Animation
+      if (this.attacking && !this.recovering) {
+        // Retrieve reference angle to where player was last angled.
+        if (!this.swingRefAngleRetrieved){
+          this.swingRefAngle = this.angle
+          this.swingRefAngleRetrieved = true
+        }
+        
+        const swingSpeed = 0.04
+        const swingArc = 1.00
+        
+        if (this.angle < this.swingRefAngle + swingArc && !this.swingBack) {
+          // Starting swinging forwards to the defined arc.
+          this.angle += swingSpeed
+        } else {
+          // Once we have got to the arc, swing back.
+          this.swingBack = true
+          this.angle -= (swingSpeed * 5)
+          
+          // Once we have got back to the start, reset all the values for next swing.
+          if (this.angle <= this.swingRefAngle) {
+            this.swingBack = false
+            this.swingRefAngleRetrieved = false
+            this.attacking = false
+            this.recovering = true
+          }
+        }
+      } else {
+        // Player looks at mouse position.
+        this.angle = parseFloat(angleTowardsMouse().toFixed(2))
+      }
     }
 
+    // Only send angle data over the network if the angle value changes.
     if (this.angle != this.storedAngle) {
       game.sendData = true
     }
@@ -28,6 +77,7 @@ class Player extends LivingEntity {
     this.drawNonRotatingElements()
   }
 
+  // Update the chat message on this client.
   updateMessage (message) {
     clearTimeout(this.messageTimeout)
     this.message = message
@@ -36,6 +86,7 @@ class Player extends LivingEntity {
     }, 10 * 1000)
   }
 
+  // Clear the chat message on this client.
   clearMessage () {
     this.message = ''
   }
@@ -71,12 +122,32 @@ class Player extends LivingEntity {
     rotate(this.angle + PI + PI / 2)
     translate(-this.x, -this.y)
     
+    this.drawCharacter()
+
+    pop()
+  }
+  
+  drawCharacter() {
     strokeWeight(2)
+
+    this.drawWeapon()
 
     ellipse(this.x, this.y, this.size, this.size)
     ellipse(this.x, this.y + this.size / 4, this.size / 4, this.size / 4)
-
-    pop()
+  }
+  
+  drawWeapon() {
+    const hammerHeadWidth = 10
+    const hammerHeadHeight = 10
+    
+    const hammerHandleLength = 20
+    const hammerHandleThickness = 1
+    
+    // Handle
+    rect(this.x - hammerHandleLength / 2, this.y + 12, hammerHandleLength, hammerHandleThickness)
+    
+    // Hammer head
+    rect(this.x - hammerHeadWidth / 2 - 15, this.y + 7, hammerHeadWidth, hammerHeadHeight)
   }
 
   handleMovement () {
@@ -98,5 +169,9 @@ class Player extends LivingEntity {
       this.y -= 1
       game.sendData = true
     }
+  }
+  
+  handleAttack() {
+    
   }
 }
