@@ -2628,6 +2628,13 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
+profanity-util@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/profanity-util/-/profanity-util-0.2.0.tgz#875bc65718b152c8582ed4f75acb0efa7f1d096a"
+  integrity sha512-/iYxXjZDnnPyJrsl4MXIFwleWMx7AXYcRyEnDWY9yrGWwDBk0lSo1tAQ8zUhEPv78YkhTeMP+AN1E0hZADA+rw==
+  dependencies:
+    underscore "~1.8.x"
+
 progress@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
@@ -3395,6 +3402,11 @@ undefsafe@^2.0.2:
   integrity sha1-Il9rngM3Zj4Njnz9aG/Cg2zKznY=
   dependencies:
     debug "^2.2.0"
+
+underscore@~1.8.x:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
+  integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
 
 union-value@^1.0.0:
   version "1.0.1"

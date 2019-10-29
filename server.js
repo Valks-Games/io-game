@@ -64,7 +64,11 @@ io.on('connection', (socket) => {
   socket.on('text', (data) => {
     io.sockets.emit('messages', {
       id: socket.id,
-      text: profanity.purify(data)[0]
+      text: profanity.purify(data, 
+        {
+          replace: true,
+          replacementsList: ['meoww', 'meowww', 'meow']
+        })[0]
     })
   })
 
