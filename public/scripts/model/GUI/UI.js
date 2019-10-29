@@ -30,7 +30,7 @@ class UI {
   // Set an UI element to be draggable
   static dragElement (elmnt) {
     var pos1 = 0; var pos2 = 0; var pos3 = 0; var pos4 = 0
-    if (elmnt.childNodes[0].id == 'header') {
+    if (elmnt.childNodes[0].id === 'header') {
       /* if present, the header is where you move the DIV from: */
       elmnt.childNodes[0].onmousedown = dragMouseDown
     } else {

@@ -47,7 +47,7 @@ function draw () {
 function keyPressed () {
   if (!game.playing) return
 
-  if (keyCode == ENTER) {
+  if (keyCode === ENTER) {
     if (!Chat.isChatFocused() && !Chat.isInputEmpty()) {
       game.socket.emit('text', Chat.filterMessage(Chat.getInputText()))
       Chat.resetInput()
@@ -167,7 +167,7 @@ function listener () {
     const entries = Object.entries(data)
     for (const [id, player] of entries) {
       if (game.player == null) continue
-      if (id == game.player.id) continue
+      if (id === game.player.id) continue
       game.players[id] = new Player(player)
       if (game.firstSetupDone) { Chat.logChatMessage(`Player ${game.players[id].name} has connected`) }
     }
@@ -177,12 +177,12 @@ function listener () {
   game.socket.on('player_transforms', function (data) {
     // The server does not care if the client is not ready for player transforms update.
     // This is why we have to check if the length is 0 in case game.players is not ready.
-    if (Object.keys(game.players).length == 0) return
+    if (Object.keys(game.players).length === 0) return
 
     const entries = Object.entries(data)
     for (const [id, player] of entries) {
       if (game.player == null) continue
-      if (id == game.player.id) continue
+      if (id === game.player.id) continue
       const theplayer = game.players[id]
       theplayer.x = player.x
       theplayer.y = player.y
@@ -191,12 +191,12 @@ function listener () {
   })
 
   game.socket.on('messages', function (data) {
-    if (data.id == game.player.id) {
+    if (data.id === game.player.id) {
       Chat.logChatMessage(`${game.player.name}: ${data.text}`, true, true)
       game.player.updateMessage(data.text)
     } else {
       // Should we delete the player at game.players[data.id] here? Or just check if its not undefined??
-      if (game.players[data.id] != undefined) {
+      if (game.players[data.id] !== undefined) {
         Chat.logChatMessage(`${game.players[data.id].name}: ${data.text}`)
         game.players[data.id].updateMessage(data.text)
       }
@@ -204,7 +204,7 @@ function listener () {
   })
 
   game.socket.on('player_disconnected', function (id) {
-    if (game.players[id] != undefined) { Chat.logChatMessage(`Player ${game.players[id].name} has disconnected`) }
+    if (game.players[id] !== undefined) { Chat.logChatMessage(`Player ${game.players[id].name} has disconnected`) }
 
     delete (game.players[id])
   })

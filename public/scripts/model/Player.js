@@ -12,11 +12,11 @@ class Player extends LivingEntity {
     this.message = ''
     this.storedMessage = ''
 
-    this.messageTimeout
+    this.messageTimeout = null
 
     this.swingBack = false
     this.swingRefAngleRetrieved = false
-    this.swingRefAngle
+    this.swingRefAngle = 0
     this.attacking = false
     this.recovering = false
     this.counter = 0
@@ -74,7 +74,7 @@ class Player extends LivingEntity {
     }
 
     // Only send angle data over the network if the angle value changes.
-    if (this.angle != this.storedAngle) {
+    if (this.angle !== this.storedAngle) {
       game.sendData = true
     }
 
@@ -109,7 +109,7 @@ class Player extends LivingEntity {
   }
 
   drawMessage () {
-    if (this.message == '') return
+    if (this.message === '') return
     push()
     fill(0, 200)
     const padding = 2
@@ -156,8 +156,8 @@ class Player extends LivingEntity {
   }
 
   handleMovement () {
-    if (!Chat.isChatFocused()) // Do not let player move if their typing a message.
-    { return }
+    // Do not let player move if their typing a message.
+    if (!Chat.isChatFocused()) return
     if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
       this.x -= 1
       game.sendData = true

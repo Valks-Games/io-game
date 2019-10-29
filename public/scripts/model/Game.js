@@ -3,10 +3,10 @@ class Game {
     this.firstSetupDone = false
 
     // Font
-    this.font
+    this.font = null
 
     // Socket
-    this.socket
+    this.socket = null
     this.sendData = false
 
     // Objects
@@ -14,7 +14,7 @@ class Game {
     this.messages = {}
 
     // Player
-    this.player
+    this.player = null
     this.playerName = ''
     this.creatingPlayer = false
     this.playing = false

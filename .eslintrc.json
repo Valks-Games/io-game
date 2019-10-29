@@ -17,5 +17,10 @@
         "ecmaVersion": 2018
     },
     "rules": {
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        "eqeqeq": "warn",
+        "no-unused-expressions": "warn",
+        "brace-style": "warn"
     }
 }

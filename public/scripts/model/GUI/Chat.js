@@ -137,7 +137,7 @@ class Chat {
 
   // Check if chat text input is empty
   static isInputEmpty () {
-    return Chat.getInputText() == ''
+    return Chat.getInputText() === ''
   }
 
   // Resets chat text input text
@@ -158,8 +158,8 @@ class Chat {
       history.mouseup(function () {
         var $this = jQuery(this)
 
-        if ($this.outerWidth() != $this.data('x') ||
-                    $this.outerHeight() != $this.data('y')) {
+        if ($this.outerWidth() !== $this.data('x') ||
+                    $this.outerHeight() !== $this.data('y')) {
           // Resize Action Here
           Chat.scrollToBottom()
         }
