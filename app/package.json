@@ -10,7 +10,7 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "electron . --inspect=7777",
-    "build": "electron-builder",
+    "build": "electron-builder --publish never",
     "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
