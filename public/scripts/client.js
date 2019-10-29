@@ -145,6 +145,7 @@ function drawReference() {
   for (let x = -amount / 2; x < amount; x++) {
     for (let z = -amount / 2; z < amount; z++) {
       translate(x * spacing, 0, z * spacing)
+      fill(55, 120 - (x * 20), 55)
       model(tree)
       translate(-x * spacing, 0, -z * spacing);
     }
@@ -207,7 +208,9 @@ function listener() {
   })
 
   game.socket.on('player_disconnected', function (id) {
-    Chat.logChatMessage(`Player ${game.players[id].name} has disconnected`)
+    if (game.players[id] != undefined)
+      Chat.logChatMessage(`Player ${game.players[id].name} has disconnected`)
+    
     delete (game.players[id])
   })
 

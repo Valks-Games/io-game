@@ -3,8 +3,25 @@ const HTMLClasses = {
     input: "input"
 }
 
-const filters = ["nigger"]
-const filterPlaceholder = "nyan"
+const filters = [
+  "asshole", 
+  "ballsack",
+  "bitch",
+  "blowjob",
+  "cunt",
+  "cock",
+  "dick",
+  "fuck",
+  "f u c k",
+  "fucker",
+  "lmfao",
+  "motherfucker",
+  "nigger",
+  "nigga",
+  "slut",
+  "whore"
+]
+const filterPlaceholder = "meoww"
 
 // Chat UI component manager
 class Chat {

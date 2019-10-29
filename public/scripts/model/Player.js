@@ -43,7 +43,7 @@ class Player extends LivingEntity {
           this.swingRefAngleRetrieved = true
         }
         
-        const swingSpeed = 0.04
+        const swingSpeed = 0.05
         const swingArc = 1.00
         
         if (this.angle < this.swingRefAngle + swingArc && !this.swingBack) {
@@ -64,7 +64,12 @@ class Player extends LivingEntity {
         }
       } else {
         // Player looks at mouse position.
-        this.angle = parseFloat(angleTowardsMouse().toFixed(2))
+        const mouseAngle = parseFloat(angleTowardsMouse().toFixed(2))
+
+        if ( this.angle < mouseAngle - PI ) this.angle = this.angle + TWO_PI;
+        if ( this.angle > mouseAngle + PI ) this.angle = this.angle - TWO_PI;
+
+        this.angle = lerp(this.angle, mouseAngle, 0.04)
       }
     }
 
