@@ -49,7 +49,7 @@ function keyPressed () {
 
   if (keyCode === ENTER) {
     if (!Chat.isChatFocused() && !Chat.isInputEmpty()) {
-      game.socket.emit('text', Chat.filterMessage(Chat.getInputText()))
+      game.socket.emit('text', Chat.getInputText())
       Chat.resetInput()
     }
     Chat.toggle()
