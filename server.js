@@ -1,5 +1,6 @@
 const express = require('express')
 const socket = require('socket.io')
+var profanity = require('profanity-util')
 
 // const Utils = require('./model/util.js')
 // const Message = require('./model/Message.js')
@@ -63,7 +64,7 @@ io.on('connection', (socket) => {
   socket.on('text', (data) => {
     io.sockets.emit('messages', {
       id: socket.id,
-      text: data
+      text: profanity.purify(data)[0]
     })
   })
 
