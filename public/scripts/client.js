@@ -8,56 +8,55 @@ const game = new Game()
 let tree
 let rock
 
-function preload() {
+function preload () {
   game.font = loadFont('./fonts/SourceSansPro-Black.otf')
   tree = loadModel('./assets/tree.obj')
   rock = loadModel('./assets/rock.obj')
 }
 
-function windowResized() {
+function windowResized () {
   resizeCanvas(windowWidth, windowHeight)
 }
 
-function setup() {
-  pixelDensity(2.0); // Default is 2.0
+function setup () {
+  pixelDensity(2.0) // Default is 2.0
   createCanvas(windowWidth, windowHeight, WEBGL)
   textFont(game.font)
 }
 
-function draw() {
+function draw () {
   setupPlayer()
 
   if (game.playing) {
     background(100, 150, 100)
 
     handleCamera()
-    
+
     drawPlayer()
 
     drawPlayers()
-    
+
     drawReference()
-    
+
     if (keyIsDown(32) || mouseIsPressed) {
       game.player.attacking = true
     }
   }
 }
 
-function keyPressed() {
+function keyPressed () {
   if (!game.playing) return
-  
+
   if (keyCode == ENTER) {
     if (!Chat.isChatFocused() && !Chat.isInputEmpty()) {
       game.socket.emit('text', Chat.filterMessage(Chat.getInputText()))
       Chat.resetInput()
-
     }
     Chat.toggle()
   }
 }
 
-function setupPlayer() {
+function setupPlayer () {
   if (game.creatingPlayer) {
     game.player = new Player({
       x: 0,
@@ -90,25 +89,25 @@ function setupPlayer() {
 
     game.creatingPlayer = false
     game.playing = true
-    
+
     // fullscreen(true) // Set fullscreen on play.
   }
 }
 
-function drawPlayer() {
+function drawPlayer () {
   game.player.draw()
   game.player.handleMovement()
   game.player.handleAttack()
 }
 
-function drawPlayers() {
+function drawPlayers () {
   const players = Object.values(game.players)
   for (const player of players) {
     player.draw()
   }
 }
 
-function handleCamera() {
+function handleCamera () {
   // Lerp zoom changed by mouse wheel.
   game.currentZoom = lerp(game.currentZoom, game.zoom, 0.02)
 
@@ -119,7 +118,7 @@ function handleCamera() {
   camera(game.player.x, game.player.y, z, game.player.x, game.player.y, 0, 0, 1, 0)
 }
 
-function drawReference() {
+function drawReference () {
   push()
   translate(0, -450, 0)
   fill(50)
@@ -127,39 +126,38 @@ function drawReference() {
   scale(50) // Scale offsets the rock for some reason?
   model(rock)
   pop()
-  
-  
+
   push()
   stroke(0)
 
   fill(55, 120, 55)
 
   scale(50)
-  stroke(0, 50, 0);
-  strokeWeight(3);
+  stroke(0, 50, 0)
+  strokeWeight(3)
 
-  
   const spacing = 6
   const amount = 5
   rotateX(HALF_PI)
   for (let x = -amount / 2; x < amount; x++) {
     for (let z = -amount / 2; z < amount; z++) {
       translate(x * spacing, 0, z * spacing)
-      fill(55, 120 - (x * 20), 55)
+      fill(55, 120 - (x * 10), 55)
+      stroke(0, 50 - (x * 10), 0)
       model(tree)
-      translate(-x * spacing, 0, -z * spacing);
+      translate(-x * spacing, 0, -z * spacing)
     }
   }
   pop()
 }
 
-function mouseWheel(event) {
+function mouseWheel (event) {
   if (game.zoom <= ZOOM_HEIGHT_MIN && game.zoom >= ZOOM_HEIGHT_MAX) game.zoom -= event.delta
   game.zoom = Math.min(game.zoom, ZOOM_HEIGHT_MIN)
   game.zoom = Math.max(game.zoom, ZOOM_HEIGHT_MAX)
 }
 
-function listener() {
+function listener () {
   game.socket.on('handshake', function (data) {
     Chat.logChatMessage(`Connected to ${getURL()}`, false)
     game.player.id = data
@@ -171,11 +169,9 @@ function listener() {
       if (game.player == null) continue
       if (id == game.player.id) continue
       game.players[id] = new Player(player)
-      if (game.firstSetupDone)
-        Chat.logChatMessage(`Player ${game.players[id].name} has connected`)
+      if (game.firstSetupDone) { Chat.logChatMessage(`Player ${game.players[id].name} has connected`) }
     }
-    if (!game.firstSetupDone)
-      game.firstSetupDone = true
+    if (!game.firstSetupDone) { game.firstSetupDone = true }
   })
 
   game.socket.on('player_transforms', function (data) {
@@ -187,7 +183,7 @@ function listener() {
     for (const [id, player] of entries) {
       if (game.player == null) continue
       if (id == game.player.id) continue
-      let theplayer = game.players[id]
+      const theplayer = game.players[id]
       theplayer.x = player.x
       theplayer.y = player.y
       theplayer.angle = player.angle
@@ -208,9 +204,8 @@ function listener() {
   })
 
   game.socket.on('player_disconnected', function (id) {
-    if (game.players[id] != undefined)
-      Chat.logChatMessage(`Player ${game.players[id].name} has disconnected`)
-    
+    if (game.players[id] != undefined) { Chat.logChatMessage(`Player ${game.players[id].name} has disconnected`) }
+
     delete (game.players[id])
   })
 

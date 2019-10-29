@@ -13,7 +13,7 @@ class Player extends LivingEntity {
     this.storedMessage = ''
 
     this.messageTimeout
-    
+
     this.swingBack = false
     this.swingRefAngleRetrieved = false
     this.swingRefAngle
@@ -25,7 +25,7 @@ class Player extends LivingEntity {
   draw () {
     if (this.client) {
       const delay = 20 * 1 // 1 second
-      
+
       // Recover delay between attacks.
       if (this.recovering) {
         this.counter = this.counter + 1
@@ -34,18 +34,18 @@ class Player extends LivingEntity {
           this.counter = 0
         }
       }
-      
+
       // Attack Animation
       if (this.attacking && !this.recovering) {
         // Retrieve reference angle to where player was last angled.
-        if (!this.swingRefAngleRetrieved){
+        if (!this.swingRefAngleRetrieved) {
           this.swingRefAngle = this.angle
           this.swingRefAngleRetrieved = true
         }
-        
+
         const swingSpeed = 0.05
         const swingArc = 1.00
-        
+
         if (this.angle < this.swingRefAngle + swingArc && !this.swingBack) {
           // Starting swinging forwards to the defined arc.
           this.angle += swingSpeed
@@ -53,7 +53,7 @@ class Player extends LivingEntity {
           // Once we have got to the arc, swing back.
           this.swingBack = true
           this.angle -= (swingSpeed * 5)
-          
+
           // Once we have got back to the start, reset all the values for next swing.
           if (this.angle <= this.swingRefAngle) {
             this.swingBack = false
@@ -66,8 +66,8 @@ class Player extends LivingEntity {
         // Player looks at mouse position.
         const mouseAngle = parseFloat(angleTowardsMouse().toFixed(2))
 
-        if ( this.angle < mouseAngle - PI ) this.angle = this.angle + TWO_PI;
-        if ( this.angle > mouseAngle + PI ) this.angle = this.angle - TWO_PI;
+        if (this.angle < mouseAngle - PI) this.angle = this.angle + TWO_PI
+        if (this.angle > mouseAngle + PI) this.angle = this.angle - TWO_PI
 
         this.angle = lerp(this.angle, mouseAngle, 0.04)
       }
@@ -126,13 +126,13 @@ class Player extends LivingEntity {
     translate(this.x, this.y)
     rotate(this.angle + PI + PI / 2)
     translate(-this.x, -this.y)
-    
+
     this.drawCharacter()
 
     pop()
   }
-  
-  drawCharacter() {
+
+  drawCharacter () {
     strokeWeight(2)
 
     this.drawWeapon()
@@ -140,17 +140,17 @@ class Player extends LivingEntity {
     ellipse(this.x, this.y, this.size, this.size)
     ellipse(this.x, this.y + this.size / 4, this.size / 4, this.size / 4)
   }
-  
-  drawWeapon() {
+
+  drawWeapon () {
     const hammerHeadWidth = 10
     const hammerHeadHeight = 10
-    
+
     const hammerHandleLength = 20
     const hammerHandleThickness = 1
-    
+
     // Handle
     rect(this.x - hammerHandleLength / 2, this.y + 12, hammerHandleLength, hammerHandleThickness)
-    
+
     // Hammer head
     rect(this.x - hammerHeadWidth / 2 - 15, this.y + 7, hammerHeadWidth, hammerHeadHeight)
   }
@@ -175,8 +175,8 @@ class Player extends LivingEntity {
       game.sendData = true
     }
   }
-  
-  handleAttack() {
-    
+
+  handleAttack () {
+
   }
 }
