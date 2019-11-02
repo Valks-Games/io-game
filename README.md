@@ -2,6 +2,8 @@
 
 ## What is IO-Game?
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/valkyrienyanko/io-game.svg)](https://greenkeeper.io/)
+
 IO-Game networking prototype using sockets and express to communicate over the network, p5.js for the graphics and input, and electron.js for cross-platform support. The end goal is to create a online RPG syncing over various elements such as NPCs, chat messages and other transforms.
 
 The game can run on Windows, Linux, Mac and any web browser.
