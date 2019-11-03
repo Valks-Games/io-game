@@ -14,8 +14,8 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
-    "electron": "^7.0.1",
-    "electron-builder": "^22.1.0"
+    "electron": "^6.0.11",
+    "electron-builder": "^21.2.0"
   },
   "build": {
     "appId": "me.valk.iogame",
