@@ -10,7 +10,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^1.19.3",
+    "nodemon": "^2.0.0",
     "profanity-util": "^0.2.0",
     "socket.io": "^2.3.0"
   },
