@@ -4,16 +4,16 @@
 
 IO-Game networking prototype using sockets and express to communicate over the network, p5.js for the graphics and input, and electron.js for cross-platform support. The end goal is to create a online RPG syncing over various elements such as NPCs, chat messages and other transforms.
 
-The game can run on Windows, Linux, Mac and any web browser.
+Thanks to electron the game has the potential to run on Windows, Linux, Mac and any web browser.
 
 ## Setup
 
-1. Clone `https://github.com/valkyrienyanko/io-game-v2.git`.
-2. Download and install `LTS` [Node.js](https://nodejs.org/en/).
-3. Make sure you have yarn installed `npm i -g yarn`.
-4. Run `yarn install`.
-5. Start server with `yarn dev:server`.
-6. Create a client by opening up `localhost:7777/` in your browser.
+1. Clone `https://github.com/valkyrienyanko/io-game-v2.git`
+2. Download and install `LTS` [Node.js](https://nodejs.org/en/)
+3. Make sure you have yarn installed `npm i -g yarn`
+4. Run `yarn install`
+5. Start server with `yarn dev:server`
+6. Create a client by opening up `localhost:7777/` in your browser
 
 If you're using nodemon, the server will automatically restart whenever code has been changed. If you ever need to restart the server manually you can do so with the `rs` command.
 Nodemon is used by default when using `yarn dev:server`. You can use `node .` instead if you prefer.
