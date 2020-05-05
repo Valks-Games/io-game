@@ -6,6 +6,8 @@
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_io-game&metric=ncloc)](https://sonarcloud.io/dashboard?id=valkyrienyanko_io-game)
 [![Issues](https://img.shields.io/github/issues/valkyrienyanko/io-game)](https://github.com/valkyrienyanko/io-game/issues)
 [![Discord](https://img.shields.io/discord/453710350454620160.svg)](https://discordapp.com/invite/N9QVxbM)
+[![GitHub stars](https://img.shields.io/github/stars/valkyrienyanko/io-game?color=brightgreen)](https://github.com/valkyrienyanko/io-game/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/valkyrienyanko/io-game?color=brightgreen)](https://github.com/valkyrienyanko/io-game/network)
 
 ## What is IO-Game?
 
