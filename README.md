@@ -1,5 +1,12 @@
 ![Preview](https://i.imgur.com/a4xPtfI.png)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/uwamqaupefdfe3ho?svg=true)](https://ci.appveyor.com/project/valkyrienyanko/io-game)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_io-game&metric=alert_status)](https://sonarcloud.io/dashboard?id=valkyrienyanko_io-game)
+[![GitHub license](https://img.shields.io/github/license/valkyrienyanko/io-game?color=brightgreen)](https://github.com/valkyrienyanko/io-game/blob/master/LICENSE)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_io-game&metric=ncloc)](https://sonarcloud.io/dashboard?id=valkyrienyanko_io-game)
+[![Issues](https://img.shields.io/github/issues/valkyrienyanko/io-game)](https://github.com/valkyrienyanko/io-game/issues)
+[![Discord](https://img.shields.io/discord/453710350454620160.svg)](https://discordapp.com/invite/N9QVxbM)
+
 ## What is IO-Game?
 
 IO-Game networking prototype using sockets and express to communicate over the network, p5.js for the graphics and input, and electron.js for cross-platform support. The end goal is to create a online RPG syncing over various elements such as NPCs, chat messages and other transforms.
