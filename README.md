@@ -1,14 +1,14 @@
 ![Preview](https://i.imgur.com/a4xPtfI.png)
 
-[![Build status][build]](build-url)
+[![Build status][build]][build-url]
 [![Quality Gate Status][quality]][quality-url]
-[![Lines of Code][lines]](lines-url)
-[![Bugs][bugs]](bugs-url)
-[![GitHub license][license]](license-url)
-[![Issues][issues]](issues-url)
-[![Discord][discord]](discord-url)
-[![GitHub stars][stars]](stars-url)
-[![GitHub forks][forks]](forks-url)
+[![Lines of Code][lines]][lines-url]
+[![Bugs][bugs]][bugs-url]
+[![GitHub license][license]][license-url]
+[![Issues][issues]][issues-url]
+[![Discord][discord]][discord-url]
+[![GitHub stars][stars]][stars-url]
+[![GitHub forks][forks]][forks-url]
 
 <h1>io-game</h1>
 io-game is a networking prototype using sockets and express to communicate over the network, p5.js for the graphics and input, and electron.js for cross-platform support. The end goal is to create a online RPG syncing over various elements such as NPCs, chat messages and other transforms.
@@ -87,7 +87,7 @@ If you have any questions, talk to me on discord **valk#3277**.
 [issues]: https://img.shields.io/github/issues/valkyrienyanko/io-game
 [issues-url]: https://github.com/valkyrienyanko/io-game/issues
 [discord]: https://img.shields.io/discord/453710350454620160.svg
-[discord-url]: https://discordapp.com/invite/N9QVxbM
+[discord-url]: https://discord.gg/thMupbv
 [stars]: https://img.shields.io/github/stars/valkyrienyanko/io-game?color=brightgreen
 [stars-url]: https://github.com/valkyrienyanko/io-game/stargazers
 [forks]: https://img.shields.io/github/forks/valkyrienyanko/io-game?color=brightgreen
