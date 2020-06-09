@@ -34,7 +34,7 @@ Feel free to contact me on Discord (**valk#3277**).
 3. [Debugging](#debugging)
 4. [Electron](#electron)
 5. [Libraries](#libraries)
-6. [Contributing](https://github.com/valkyrienyanko/io-game-v2/blob/master/CONTRIBUTING.md)
+6. [Contributing](https://github.com/valkyrienyanko/io-game/blob/master/.github/CONTRIBUTING.md)
 
 ## Setup
 
