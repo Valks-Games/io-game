@@ -8,7 +8,6 @@
   [![Bugs][bugs]][bugs-url]
   [![GitHub license][license]][license-url]
   [![Issues][issues]][issues-url]
-  [![Discord][discord]][discord-url]
   [![GitHub stars][stars]][stars-url]
   [![GitHub forks][forks]][forks-url]
   
@@ -88,8 +87,6 @@ An external debugger will automatically be attached if you run the app through `
 [license-url]: https://github.com/valkyrienyanko/io-game/blob/master/LICENSE
 [issues]: https://img.shields.io/github/issues/valkyrienyanko/io-game
 [issues-url]: https://github.com/valkyrienyanko/io-game/issues
-[discord]: https://img.shields.io/discord/453710350454620160.svg
-[discord-url]: https://discord.gg/thMupbv
 [stars]: https://img.shields.io/github/stars/valkyrienyanko/io-game?color=brightgreen
 [stars-url]: https://github.com/valkyrienyanko/io-game/stargazers
 [forks]: https://img.shields.io/github/forks/valkyrienyanko/io-game?color=brightgreen
