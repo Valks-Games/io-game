@@ -26,8 +26,6 @@ Thanks to electron the game has the potential to run on Windows, Linux, Mac and 
 
 Due to the limitations of the p5.js graphics library and the complexity of three.js, this project has been discontinued and is now a relic in time. I'm still open to working on it if anyone has any suggestions.
 
-Feel free to contact me on Discord (**valk#3277**).
-
 ## Table of Contents
 1. [Setup](#setup)
 2. [Building](#building)
