@@ -25,14 +25,6 @@ Thanks to electron the game has the potential to run on Windows, Linux, Mac and 
 
 Due to the limitations of the p5.js graphics library and the complexity of three.js, this project has been discontinued and is now a relic in time. I'm still open to working on it if anyone has any suggestions.
 
-## Table of Contents
-1. [Setup](#setup)
-2. [Building](#building)
-3. [Debugging](#debugging)
-4. [Electron](#electron)
-5. [Libraries](#libraries)
-6. [Contributing](https://github.com/valkyrienyanko/io-game/blob/master/.github/CONTRIBUTING.md)
-
 ## Setup
 
 1. Clone `https://github.com/valkyrienyanko/io-game-v2.git`
@@ -42,30 +34,9 @@ Due to the limitations of the p5.js graphics library and the complexity of three
 5. Start server with `yarn dev:server`
 6. Create a client by opening up `localhost:7777/` in your browser
 
-If you're using nodemon, the server will automatically restart whenever code has been changed. If you ever need to restart the server manually you can do so with the `rs` command.
-Nodemon is used by default when using `yarn dev:server`. You can use `node .` instead if you prefer.
-
 ## Building
 
 Use `yarn build` to build the electron app.
-
-## Debugging
-
-### Server
-
-The server will spit out errors directly to the server console. If you're using nodemon, it will restart the server when changes are made to any of the files.
-
-### Browser
-
-Viewing the developer console depends on which browser you're using. Here are some hotkeys to take note of.
-
-| Chrome                 | Firefox               | Opera                  |
-| ---------------------- | --------------------- | ---------------------- |
-| `CTRL` + `SHIFT` + `J` | `CTRL` + `SHIFT` + `J`| `CTRL` + `SHIFT` + `I` |
-
-## Electron
-
-An external debugger will automatically be attached if you run the app through `yarn dev:client`. Note that this has not been tested and may not even be the right way to go about debugging electron.
 
 ## Libraries
 
