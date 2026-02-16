@@ -1,20 +1,5 @@
 ![Preview](https://i.imgur.com/a4xPtfI.png)
 
-<div align="center">
-  
-  [![Build status][build]][build-url]
-  [![Quality Gate Status][quality]][quality-url]
-  [![Lines of Code][lines]][lines-url]
-  [![Bugs][bugs]][bugs-url]
-  [![GitHub license][license]][license-url]
-  [![Issues][issues]][issues-url]
-  [![GitHub stars][stars]][stars-url]
-  [![GitHub forks][forks]][forks-url]
-  
-</div>
-
----
-
 <p align="center"> io-game is a networking prototype using sockets and express to communicate over the network, p5.js for the graphics and input, and electron.js for cross-platform support. The end goal is to create a online RPG syncing over various elements such as NPCs, chat messages and other transforms.
     <br> 
 </p>
